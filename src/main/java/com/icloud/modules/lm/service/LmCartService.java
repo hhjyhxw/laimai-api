@@ -1,11 +1,15 @@
 package com.icloud.modules.lm.service;
 
-import com.icloud.modules.lm.entity.LmCart;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.icloud.basecommon.service.BaseServiceImpl;
 import com.icloud.modules.lm.dao.LmCartMapper;
+import com.icloud.modules.lm.dto.CartDTO;
+import com.icloud.modules.lm.entity.LmCart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 /**
  * 购物车 
  * @author zdh
@@ -18,5 +22,9 @@ public class LmCartService extends BaseServiceImpl<LmCartMapper,LmCart> {
 
     @Autowired
     private LmCartMapper lmCartMapper;
+
+    public List<CartDTO> getCartList(Long userId){
+        return lmCartMapper.getCartList(userId);
+    }
 }
 

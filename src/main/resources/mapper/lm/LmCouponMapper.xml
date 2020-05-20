@@ -18,8 +18,8 @@
      <result property="status" column="status"/>
      <result property="categoryId" column="category_id"/>
      <result property="days" column="days"/>
-     <result property="startTime" column="start_time"/>
-     <result property="endTime" column="end_time"/>
+     <result property="start" column="start"/>
+     <result property="end" column="end"/>
      <result property="createdBy" column="created_by"/>
      <result property="createdTime" column="created_time"/>
      <result property="updatedBy" column="updated_by"/>
@@ -28,7 +28,7 @@
 
    <!-- 基础字段列 -->
    <sql id="Base_Column_List" >
-id,title,type,description,total,surplus,limits,discount,min,status,category_id,days,start_time,end_time,created_by,created_time,updated_by,updated_time
+id,title,type,description,total,surplus,limits,discount,min,status,category_id,days,start,end,created_by,created_time,updated_by,updated_time
     </sql>
 
 
@@ -71,11 +71,11 @@ select * from lm_coupon t
 <if test="days != null">
     and t.days = #{days}
 </if>
-<if test="start_time != null">
-    and t.start_time = #{start_time}
+<if test="start != null">
+    and t.start = #{start}
 </if>
-<if test="end_time != null">
-    and t.end_time = #{end_time}
+<if test="end != null">
+    and t.end = #{end}
 </if>
 <if test="created_by != null">
     and t.created_by = #{created_by}
@@ -88,4 +88,93 @@ select * from lm_coupon t
 </if>
 </where>
 </select>
+
+    <update id="decCoupon">
+        update lm_coupon set surplus = surplus - 1 where id = #{couponId}
+    </update>
+
+    <select id="getUserCouponsCount" resultType="com.icloud.modules.lm.model.KVModel">
+        SELECT
+        coupon_id AS `key`,
+        count( coupon_id ) AS `value`
+        FROM
+        unimall_user_coupon
+        WHERE
+        coupon_id IN
+        <foreach open="(" close=")" collection="couponIds" separator="," item="cid">
+            #{cid}
+        </foreach>
+        AND user_id = #{userId}
+        GROUP BY
+        coupon_id;
+    </select>
+
+
+    <select id="getAdminCouponList" resultType="com.icloud.modules.lm.dto.CouponAdminDTO">
+        SELECT
+        c.id AS id,
+        c.title AS title,
+        c.`type` AS `type`,
+        c.description AS description,
+        c.total AS total,
+        c.surplus AS surplus,
+        c.`limit` AS `limit`,
+        c.discount AS discount,
+        c.min AS min,
+        c.status AS status,
+        g.title as categoryTitle,
+        c.category_id as categoryId,
+        c.days AS days,
+        c.gmt_start as gmtStart,
+        c.gmt_end as gmtEnd
+        FROM
+        lm_coupon c
+        LEFT JOIN lm_category g on c.category_id = g.id
+        WHERE
+        1 = 1
+        <if test="title != null">
+            AND c.title like concat("%",#{title},"%")
+        </if>
+        <if test="type != null">
+            AND c.type = #{type}
+        </if>
+        <if test="status != null">
+            <if test="status >= 0">
+                AND c.status = #{status} AND (unix_timestamp(c.gmt_end) &gt; unix_timestamp(#{now}) or c.days is not null)
+            </if>
+            <if test="status &lt; 0">
+                AND unix_timestamp(c.gmt_end) &lt; unix_timestamp(#{now})
+            </if>
+        </if>
+        order BY c.id DESC
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="getActiveCoupons" resultType="com.icloud.modules.lm.dto.CouponDTO">
+        SELECT
+        c.id,
+        c.title,
+        c.type,
+        c.description,
+        c.total,
+        c.surplus,
+        c.`limit`,
+        c.discount,
+        c.`min`,
+        c.`status`,
+        c.category_id AS categoryId,
+        c.days,
+        c.gmt_start AS gmtStart,
+        c.gmt_end AS gmtEnd,
+        c.gmt_update AS gmtUpdate,
+        c.gmt_create AS gmtCreate,
+        y.title AS categoryTitle
+        FROM
+        unimall_coupon AS c
+        LEFT JOIN unimall_category AS y ON y.id = c.category_id
+        WHERE
+        c.`status` = 1
+        AND (c.gmt_end IS NULL OR ( unix_timestamp(c.gmt_start) &lt; unix_timestamp(now( )) AND unix_timestamp(c.gmt_end) &gt; unix_timestamp(now( )) ))
+    </select>
+
 </mapper>

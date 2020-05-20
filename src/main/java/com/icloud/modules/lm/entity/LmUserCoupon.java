@@ -37,10 +37,10 @@ public class LmUserCoupon implements Serializable {
        @TableField("usered_time")
        private Date useredTime;
    	   	   /* 领取优惠券时写入(有效器开启时间) */
-       @TableField("start_time")
+       @TableField("start")
        private Date startTime;
    	   	   /* 领取优惠券过期时间根据策略计算 */
-       @TableField("end_time")
+       @TableField("end")
        private Date endTime;
    	   	   /* 创建人 */
        @TableField("created_by")

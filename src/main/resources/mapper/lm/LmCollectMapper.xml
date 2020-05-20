@@ -49,7 +49,7 @@ select * from lm_collect t
         c.user_id as userId,
         c.created_time as createdTime,
         c.updated_time as updatedTime,
-        c.spu_id as spuId,
+        c.collect_object_id as spuId,
         s.original_price as originalPrice,
         s.price as price,
         s.vip_price as vipPrice,
@@ -75,7 +75,7 @@ select * from lm_collect t
         c.user_id as userId,
         c.created_time as createdTime,
         c.updated_time as updatedTime,
-        c.spu_id as spuId,
+        c.collect_object_id as spuId,
         s.original_price as originalPrice,
         s.price as price,
         s.vip_price as vipPrice,
@@ -93,12 +93,12 @@ select * from lm_collect t
         and c.spu_id = s.id
         and c.id = #{collectId}
         <if test="spuId != null">
-            and c.spu_id = #{spuId}
+            and c.collect_object_id = #{spuId}
         </if>
     </select>
 
 
     <select id="getUserCollectSpuIds" resultType="java.lang.String">
-        SELECT spu_id FROM  lm_collect WHERE user_id = #{userId}
+        SELECT collect_object_id FROM  lm_collect WHERE user_id = #{userId}
     </select>
 </mapper>

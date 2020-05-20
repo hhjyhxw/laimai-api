@@ -1,6 +1,6 @@
 package com.icloud.modules.lm.dto;
 
-import com.icloud.modules.lm.entity.LmSpu;
+import com.icloud.modules.lm.dto.goods.SpuDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -16,8 +16,8 @@ public class IntegralIndexDataDTO {
 
     private List<RecommendDTO> windowRecommend;//后台推荐商品
 
-    private List<LmSpu> salesTop;//销量倒序
+    private List<SpuDTO> salesTop;//销量倒序
 
-    private List<LmSpu> newTop;//新品
+    private List<SpuDTO> newTop;//新品
 
 }

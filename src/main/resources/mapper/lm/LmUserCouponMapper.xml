@@ -11,8 +11,8 @@
      <result property="couponId" column="coupon_id"/>
      <result property="orderId" column="order_id"/>
      <result property="useredTime" column="usered_time"/>
-     <result property="startTime" column="start_time"/>
-     <result property="endTime" column="end_time"/>
+     <result property="start" column="start"/>
+     <result property="end" column="end"/>
      <result property="createdBy" column="created_by"/>
      <result property="createdTime" column="created_time"/>
      <result property="updatedBy" column="updated_by"/>
@@ -21,7 +21,7 @@
 
    <!-- 基础字段列 -->
    <sql id="Base_Column_List" >
-id,user_id,coupon_id,order_id,usered_time,start_time,end_time,created_by,created_time,updated_by,updated_time
+id,user_id,coupon_id,order_id,usered_time,start,end,created_by,created_time,updated_by,updated_time
     </sql>
 
 
@@ -43,11 +43,11 @@ select * from lm_user_coupon t
 <if test="usered_time != null">
     and t.usered_time = #{usered_time}
 </if>
-<if test="start_time != null">
-    and t.start_time = #{start_time}
+<if test="start != null">
+    and t.start = #{start}
 </if>
-<if test="end_time != null">
-    and t.end_time = #{end_time}
+<if test="end != null">
+    and t.end = #{end}
 </if>
 <if test="created_by != null">
     and t.created_by = #{created_by}

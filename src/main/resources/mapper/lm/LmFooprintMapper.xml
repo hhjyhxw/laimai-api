@@ -36,4 +36,25 @@ select * from lm_foot_print t
 </if>
 </where>
 </select>
+
+    <select id="getAllFootprint" resultType="com.icloud.modules.lm.dto.FootprintDTO">
+        SELECT
+        fp.id AS id,
+        fp.user_id AS userId,
+        fp.spu_id AS spuId,
+        sp.price AS spuPrice,
+        sp.title AS spuTitle,
+        sp.img AS spuImg,
+        fp.created_time AS createdTime,
+        fp.updated_time AS updatedTime
+        FROM
+        lm_footprint AS fp,
+        lm_spu AS sp
+        WHERE
+        fp.spu_id = sp.id
+        AND fp.user_id = #{userId}
+        ORDER BY fp.updated_time DESC
+        LIMIT
+        #{offset},#{size}
+    </select>
 </mapper>

@@ -18,13 +18,12 @@ public class AdminNotifyConfig {
     @Autowired
     private MyPropertitys myPropertitys;
 
-    private String enable = myPropertitys.getAdminNotify().getEnable();
 
     @Bean
     public AdminNotifyBizService adminNotifyBizService() {
-        if ("mock".equalsIgnoreCase(enable)) {
+        if ("mock".equalsIgnoreCase(myPropertitys.getAdminNotify().getEnable())) {
             return new MockAdminNotifyBizServiceImpl();
-        } else if ("uninotify".equalsIgnoreCase(enable)) {
+        } else if ("uninotify".equalsIgnoreCase(myPropertitys.getAdminNotify().getEnable())) {
             return new UniNotifyAdminNotifyBizServiceImpl();
         } else {
             return null;

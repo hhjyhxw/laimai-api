@@ -14,7 +14,7 @@ import okhttp3.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.CollectionUtils;
 
@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-@Component
+@Service
 public class KdniaoTrackQueryAPI implements ShipTraceQuery {
 
     private static final Logger logger = LoggerFactory.getLogger(KdniaoTrackQueryAPI.class);
@@ -33,9 +33,9 @@ public class KdniaoTrackQueryAPI implements ShipTraceQuery {
     @Autowired
     private MyPropertitys myPropertitys;
 
-    private String businessID = myPropertitys.getKdm().getBusinessid();
-
-    private String appKey = myPropertitys.getKdm().getAppkey();
+//    private String businessID = myPropertitys.getKdn().getBusinessid();
+//
+//    private String appKey = myPropertitys.getKdn().getAppkey();
 
     private static final String REQ_URL = "http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx";
 
@@ -84,9 +84,9 @@ public class KdniaoTrackQueryAPI implements ShipTraceQuery {
         sb.append("RequestData=");
         sb.append(URLEncoder.encode(requestData, "UTF-8"));
         sb.append("&EBusinessID=");
-        sb.append(businessID);
+        sb.append(myPropertitys.getKdn().getBusinessid());
         sb.append("&RequestType=1002");
-        String dataSign = encrypt(requestData, appKey, "UTF-8");
+        String dataSign = encrypt(requestData, myPropertitys.getKdn().getAppkey(), "UTF-8");
         sb.append("&DataSign=");
         sb.append(dataSign);
         sb.append("&DataType=2");

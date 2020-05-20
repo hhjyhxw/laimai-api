@@ -44,4 +44,31 @@ select * from lm_cart t
 </if>
 </where>
 </select>
+
+    <select id="getCartList" resultType="com.icloud.modules.lm.dto.CartDTO">
+        SELECT
+        c.id,
+        c.sku_id AS skuId,
+        c.num,
+        p.title,
+        k.price,
+        k.original_price AS originalPrice,
+        k.vip_price AS vipPrice,
+        k.title AS skuTitle,
+        p.img AS spuImg,
+        k.img AS skuImg,
+        k.stock,
+        k.spu_id AS spuId,
+        p.category_id AS categoryId,
+        c.created_time as createdTime,
+        c.updated_time as updatedTime,
+        FROM
+        lm_cart AS c,
+        lm_sku AS k,
+        lm_spu AS p
+        WHERE
+        c.user_id = #{userId}
+        AND c.sku_id = k.id
+        AND k.spu_id = p.id
+    </select>
 </mapper>

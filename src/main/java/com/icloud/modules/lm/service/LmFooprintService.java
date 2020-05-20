@@ -1,11 +1,16 @@
 package com.icloud.modules.lm.service;
 
-import com.icloud.modules.lm.entity.LmFooprint;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import com.icloud.basecommon.service.BaseServiceImpl;
 import com.icloud.modules.lm.dao.LmFooprintMapper;
+import com.icloud.modules.lm.dto.FootprintDTO;
+import com.icloud.modules.lm.entity.LmFooprint;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 /**
  * 用户足迹 
  * @author zdh
@@ -18,5 +23,11 @@ public class LmFooprintService extends BaseServiceImpl<LmFooprintMapper,LmFoopri
 
     @Autowired
     private LmFooprintMapper lmFooprintMapper;
+
+
+    public List<FootprintDTO> getAllFootprint(Long userId,Integer offset,Integer size){
+        return lmFooprintMapper.getAllFootprint(userId,offset,size);
+    }
+
 }
 

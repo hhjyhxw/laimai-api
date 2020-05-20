@@ -58,11 +58,11 @@ public class LmCoupon implements Serializable {
        @TableField("days")
        private Integer days;
    	   	   /* 有效开始时间 */
-       @TableField("start_time")
-       private Date startTime;
+       @TableField("start")
+       private Date start;
    	   	   /* 有效结束时间 */
-       @TableField("end_time")
-       private Date endTime;
+       @TableField("end")
+       private Date end;
    	   	   /* 创建人 */
        @TableField("created_by")
        private String createdBy;

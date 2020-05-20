@@ -34,10 +34,10 @@ public class LmGroupShop implements Serializable {
        @TableField("max_price")
        private Integer maxPrice;
    	   	   /* 团购开始时间 */
-       @TableField("start_time")
+       @TableField("start")
        private Date startTime;
    	   	   /* 团购结束时间 */
-       @TableField("end_time")
+       @TableField("end")
        private Date endTime;
    	   	   /* 团购基础人数 */
        @TableField("minimum_number")

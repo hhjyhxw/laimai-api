@@ -15,7 +15,7 @@ public class MyPropertitys {
     //云存储
     private OSS oss;
     //快递查询
-    private KDN kdm;
+    private KDN kdn;
     //短信配置
     private SMS sms;
     //管理员通知配置

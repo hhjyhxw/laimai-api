@@ -10,8 +10,8 @@
      <result property="spuId" column="spu_id"/>
      <result property="minPrice" column="min_price"/>
      <result property="maxPrice" column="max_price"/>
-     <result property="startTime" column="start_time"/>
-     <result property="endTime" column="end_time"/>
+     <result property="start" column="start"/>
+     <result property="end" column="end"/>
      <result property="minimumNumber" column="minimum_number"/>
      <result property="alreadyBuyNumber" column="already_buy_number"/>
      <result property="automaticRefund" column="automatic_refund"/>
@@ -24,7 +24,7 @@
 
    <!-- 基础字段列 -->
    <sql id="Base_Column_List" >
-id,spu_id,min_price,max_price,start_time,end_time,minimum_number,already_buy_number,automatic_refund,status,created_by,created_time,updated_by,updated_time
+id,spu_id,min_price,max_price,start,end,minimum_number,already_buy_number,automatic_refund,status,created_by,created_time,updated_by,updated_time
     </sql>
 
 
@@ -43,11 +43,11 @@ select * from lm_group_shop t
 <if test="max_price != null">
     and t.max_price = #{max_price}
 </if>
-<if test="start_time != null">
-    and t.start_time = #{start_time}
+<if test="start != null">
+    and t.start = #{start}
 </if>
-<if test="end_time != null">
-    and t.end_time = #{end_time}
+<if test="end != null">
+    and t.end = #{end}
 </if>
 <if test="minimum_number != null">
     and t.minimum_number = #{minimum_number}

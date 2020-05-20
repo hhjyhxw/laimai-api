@@ -18,11 +18,10 @@ public class AliyunStorageBizServiceImpl implements StorageBizService {
     @Autowired
     private MyPropertitys myPropertitys;
 
-    private String endpoint = myPropertitys.getOss().getEndpoint();
-    private String bucket = myPropertitys.getOss().getBucket();
-    private String baseUrl = myPropertitys.getOss().getBasekUrl();
+//    private String endpoint = myPropertitys.getOss().getEndpoint();
+//    private String bucket = myPropertitys.getOss().getBucket();
+//    private String baseUrl = myPropertitys.getOss().getBasekUrl();
 
-    @Autowired
     private OSSClient ossClient;
 
     @Override
@@ -30,8 +29,10 @@ public class AliyunStorageBizServiceImpl implements StorageBizService {
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(contentLength);
         objectMetadata.setContentType(contentType);
-        PutObjectRequest putObjectRequest = new PutObjectRequest(bucket, fileName, is, objectMetadata);
+        PutObjectRequest putObjectRequest = new PutObjectRequest(myPropertitys.getOss().getBucket(), fileName, is, objectMetadata);
+        ossClient =  new OSSClient(myPropertitys.getOss().getEndpoint(), myPropertitys.getOss().getAccessId(),
+                myPropertitys.getOss().getAccessKey());
         ossClient.putObject(putObjectRequest);
-        return baseUrl + fileName;
+        return myPropertitys.getOss().getBasekUrl() + fileName;
     }
 }

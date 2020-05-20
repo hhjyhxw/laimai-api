@@ -31,13 +31,13 @@ public class UserBizService {
     @Autowired
     private MyPropertitys myPropertitys;
 
-    private String wxH5Appid = myPropertitys.getWx().getH5().getAppid();
-
-    private String wxH5Secret = myPropertitys.getWx().getH5().getAppsecret();
-
-    private String wxMiniAppid = myPropertitys.getWx().getMini().getAppid();
-
-    private String wxMiniSecret = myPropertitys.getWx().getMini().getAppsecret();
+//    private String wxH5Appid = myPropertitys.getWx().getH5().getAppid();
+//
+//    private String wxH5Secret = myPropertitys.getWx().getH5().getAppsecret();
+//
+//    private String wxMiniAppid = myPropertitys.getWx().getMini().getAppid();
+//
+//    private String wxMiniSecret = myPropertitys.getWx().getMini().getAppsecret();
 
     @Autowired
     private CacheComponent cacheComponent;
@@ -53,7 +53,7 @@ public class UserBizService {
             //尝试获取微信公众号Token
             String accessJson = okHttpClient.newCall(
                     new Request.Builder()
-                            .url("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxH5Appid + "&secret=" + wxH5Secret)
+                            .url("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + myPropertitys.getWx().getH5().getAppid() + "&secret=" + myPropertitys.getWx().getH5().getAppsecret())
                             .get()
                             .build()).execute().body().string();
             JSONObject jsonObject = JSONObject.parseObject(accessJson);
@@ -98,7 +98,7 @@ public class UserBizService {
         if (StringUtils.isEmpty(access_token)) {
             String accessJson = okHttpClient.newCall(
                     new Request.Builder()
-                            .url("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + wxMiniAppid + "&secret=" + wxMiniSecret)
+                            .url("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + myPropertitys.getWx().getMini().getAppid() + "&secret=" + myPropertitys.getWx().getMini().getAppsecret())
                             .get()
                             .build()).execute().body().string();
             JSONObject jsonObject = JSONObject.parseObject(accessJson);

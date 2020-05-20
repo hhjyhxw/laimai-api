@@ -11,6 +11,7 @@ import com.icloud.exceptions.ApiException;
 import com.icloud.exceptions.ServiceException;
 import com.icloud.modules.lm.componts.LockComponent;
 import com.icloud.modules.lm.dao.LmOrderMapper;
+import com.icloud.modules.lm.dao.LmOrderSkuMapper;
 import com.icloud.modules.lm.dao.LmUserMapper;
 import com.icloud.modules.lm.dto.order.OrderDTO;
 import com.icloud.modules.lm.entity.LmOrder;
@@ -55,7 +56,7 @@ public class OrderBizService {
     private LmOrderMapper orderMapper;
 
     @Autowired
-    private LmOrderSku orderSkuMapper;
+    private LmOrderSkuMapper orderSkuMapper;
 
     @Autowired
     private LmOrderSkuService lmOrderSkuService;
@@ -68,9 +69,9 @@ public class OrderBizService {
     @Autowired
     private WxPayService wxPayService;
 
-    private String wxMiNiAppid = myPropertitys.getWx().getMini().getAppid();
-
-    private String wxAppAppid = myPropertitys.getWx().getApp().getAppid();
+//    private String wxMiNiAppid = myPropertitys.getWx().getMini().getAppid();
+//
+//    private String wxAppAppid = myPropertitys.getWx().getApp().getAppid();
 
     public boolean changeOrderStatus(String orderNo, int nowStatus, LmOrder orderDO) throws ApiException {
         try {
@@ -148,7 +149,7 @@ public class OrderBizService {
                 int loginType = Integer.parseInt(userDO.getLoginType());
                 //2.1.2 向微信支付平台发送退款请求
                 WxPayRefundRequest wxPayRefundRequest = new WxPayRefundRequest();
-                wxPayRefundRequest.setAppid(loginType == UserLoginType.MP_WEIXIN.getCode() ? wxMiNiAppid : wxAppAppid);
+                wxPayRefundRequest.setAppid(loginType == UserLoginType.MP_WEIXIN.getCode() ? myPropertitys.getWx().getMini().getAppid() : myPropertitys.getWx().getApp().getAppid());
                 wxPayRefundRequest.setOutTradeNo(orderNo);//订单号
                 wxPayRefundRequest.setOutRefundNo("refund_" + orderNo);//退款单号
                 wxPayRefundRequest.setRefundDesc("团购失败退款");

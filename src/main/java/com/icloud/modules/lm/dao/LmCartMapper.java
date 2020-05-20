@@ -1,7 +1,9 @@
 package com.icloud.modules.lm.dao;
 
-import com.icloud.modules.lm.entity.LmCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.icloud.modules.lm.dto.CartDTO;
+import com.icloud.modules.lm.entity.LmCart;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +16,6 @@ import java.util.Map;
 public interface LmCartMapper extends BaseMapper<LmCart> {
 
 	List<LmCart> queryMixList(Map<String, Object> map);
+
+    public List<CartDTO> getCartList(Long userId);
 }

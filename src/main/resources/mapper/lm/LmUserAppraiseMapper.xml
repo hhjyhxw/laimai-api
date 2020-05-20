@@ -62,7 +62,7 @@ select * from lm_user_appraise t
 </select>
 
 
-    <select id="selectSpuAllAppraise" resultType="com.icloud.modules.lm.dto.AppraiseResponseDTO">
+    <select id="selectSpuAllAppraise" resultType="com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO">
         select
         a.id as id,
         a.created_time as createdTime,
@@ -91,7 +91,7 @@ select * from lm_user_appraise t
         limit #{offset},#{size}
     </select>
 
-    <select id="selectUserAllAppraise" resultType="com.icloud.modules.lm.dto.AppraiseResponseDTO">
+    <select id="selectUserAllAppraise" resultType="com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO">
     select
     a.id as id,
     a.created_time as createdTime,
@@ -120,7 +120,7 @@ select * from lm_user_appraise t
     limit #{offset},#{size}
 </select>
 
-<select id="selectOneById" resultType="com.icloud.modules.lm.dto.AppraiseResponseDTO">
+<select id="selectOneById" resultType="com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO">
 select
 a.id as id,
 a.created_time as createdTime,
@@ -147,7 +147,7 @@ and a.sku_id = sk.id
 and a.id = #{appraiseId}
 </select>
 
-<select id="selectAppraiseCondition" resultType="com.icloud.modules.lm.dto.AppraiseResponseDTO">
+<select id="selectAppraiseCondition" resultType="com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO">
 select
 a.id as id,
 a.created_time as createdTime,

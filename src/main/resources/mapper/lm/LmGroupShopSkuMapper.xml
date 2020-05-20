@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmGroupShopSkuMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmGroupShopSku" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="skuId" column="sku_id"/>
+     <result property="groupShopId" column="group_shop_id"/>
+     <result property="skuGroupShopPrice" column="sku_group_shop_price"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,sku_id,group_shop_id,sku_group_shop_price,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_group_shop_sku t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="sku_id != null">
+    and t.sku_id = #{sku_id}
+</if>
+<if test="group_shop_id != null">
+    and t.group_shop_id = #{group_shop_id}
+</if>
+<if test="sku_group_shop_price != null">
+    and t.sku_group_shop_price = #{sku_group_shop_price}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+</mapper>

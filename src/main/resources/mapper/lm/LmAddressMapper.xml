@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmAddressMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmAddress" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="province" column="province"/>
+     <result property="city" column="city"/>
+     <result property="county" column="county"/>
+     <result property="address" column="address"/>
+     <result property="userId" column="user_id"/>
+     <result property="phone" column="phone"/>
+     <result property="consignee" column="consignee"/>
+     <result property="isDefault" column="is_default"/>
+     <result property="lnt" column="lnt"/>
+     <result property="lat" column="lat"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,province,city,county,address,user_id,phone,consignee,is_default,lnt,lat,created_time,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_address t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="province != null">
+    and t.province = #{province}
+</if>
+<if test="city != null">
+    and t.city = #{city}
+</if>
+<if test="county != null">
+    and t.county = #{county}
+</if>
+<if test="address != null">
+    and t.address = #{address}
+</if>
+<if test="user_id != null">
+    and t.user_id = #{user_id}
+</if>
+<if test="phone != null">
+    and t.phone = #{phone}
+</if>
+<if test="consignee != null">
+    and t.consignee = #{consignee}
+</if>
+<if test="is_default != null">
+    and t.is_default = #{is_default}
+</if>
+<if test="lnt != null">
+    and t.lnt = #{lnt}
+</if>
+<if test="lat != null">
+    and t.lat = #{lat}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+</where>
+</select>
+</mapper>

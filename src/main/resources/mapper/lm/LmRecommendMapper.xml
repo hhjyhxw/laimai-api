@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmRecommendMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmRecommend" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="spuId" column="spu_id"/>
+     <result property="recommendType" column="recommend_type"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,spu_id,recommend_type,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_recommend t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="spu_id != null">
+    and t.spu_id = #{spu_id}
+</if>
+<if test="recommend_type != null">
+    and t.recommend_type = #{recommend_type}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+
+    <select id="getRecommendByType" resultType="com.icloud.modules.lm.dto.RecommendDTO">
+
+    SELECT
+    re.id as id,
+    re.recommend_type as recommendType,
+    re.spu_id as spuId,
+    sp.original_price  as spuOriginalPrice,
+    sp.price as spuPrice,
+    sp.vip_price as spuVipPrice,
+    sp.sales as spuSales,
+    sp.img as spuImg,
+    sp.title as spuTitle,
+    sp.category_id as spuCategoryId
+    FROM
+    lm_recommend re,
+    lm_spu sp
+    WHERE
+    re.spu_id = sp.id
+    and re.recommend_type = #{recommendType}
+    limit #{offset},#{pageSize}
+</select>
+
+<select id="getAllRecommend" resultType="com.icloud.modules.lm.dto.RecommendDTO">
+
+SELECT
+re.id as id,
+re.recommend_type as recommendType,
+re.spu_id as spuId,
+sp.original_price  as spuOriginalPrice,
+sp.price as spuPrice,
+sp.vip_price as spuVipPrice,
+sp.sales as spuSales,
+sp.img as spuImg,
+sp.title as spuTitle,
+sp.category_id as spuCategoryId
+FROM
+lm_recommend re,
+lm_spu sp
+WHERE
+re.spu_id = sp.id
+limit #{offset},#{pageSize}
+</select>
+
+
+</mapper>

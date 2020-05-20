@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmOrderMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmOrder" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="channel" column="channel"/>
+     <result property="orderNo" column="order_no"/>
+     <result property="userId" column="user_id"/>
+     <result property="status" column="status"/>
+     <result property="skuOriginalTotalPrice" column="sku_original_total_price"/>
+     <result property="skuTotalPrice" column="sku_total_price"/>
+     <result property="freightPrice" column="freight_price"/>
+     <result property="couponPrice" column="coupon_price"/>
+     <result property="couponId" column="coupon_id"/>
+     <result property="groupShopId" column="group_shop_id"/>
+     <result property="actualPrice" column="actual_price"/>
+     <result property="payPrice" column="pay_price"/>
+     <result property="payId" column="pay_id"/>
+     <result property="payChannel" column="pay_channel"/>
+     <result property="gmtPay" column="gmt_pay"/>
+     <result property="shipNo" column="ship_no"/>
+     <result property="shipCode" column="ship_code"/>
+     <result property="gmtShip" column="gmt_ship"/>
+     <result property="gmtConfirm" column="gmt_confirm"/>
+     <result property="province" column="province"/>
+     <result property="city" column="city"/>
+     <result property="county" column="county"/>
+     <result property="address" column="address"/>
+     <result property="phone" column="phone"/>
+     <result property="consignee" column="consignee"/>
+     <result property="mono" column="mono"/>
+     <result property="distributionPointId" column="distribution_point_id"/>
+     <result property="adminMonoLevel" column="admin_mono_level"/>
+     <result property="adminMono" column="admin_mono"/>
+     <result property="refundReason" column="refund_reason"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,channel,order_no,user_id,status,sku_original_total_price,sku_total_price,freight_price,coupon_price,coupon_id,group_shop_id,actual_price,pay_price,pay_id,pay_channel,gmt_pay,ship_no,ship_code,gmt_ship,gmt_confirm,province,city,county,address,phone,consignee,mono,distribution_point_id,admin_mono_level,admin_mono,refund_reason,created_time,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_order t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="channel != null">
+    and t.channel = #{channel}
+</if>
+<if test="order_no != null">
+    and t.order_no = #{order_no}
+</if>
+<if test="user_id != null">
+    and t.user_id = #{user_id}
+</if>
+<if test="status != null">
+    and t.status = #{status}
+</if>
+<if test="sku_original_total_price != null">
+    and t.sku_original_total_price = #{sku_original_total_price}
+</if>
+<if test="sku_total_price != null">
+    and t.sku_total_price = #{sku_total_price}
+</if>
+<if test="freight_price != null">
+    and t.freight_price = #{freight_price}
+</if>
+<if test="coupon_price != null">
+    and t.coupon_price = #{coupon_price}
+</if>
+<if test="coupon_id != null">
+    and t.coupon_id = #{coupon_id}
+</if>
+<if test="group_shop_id != null">
+    and t.group_shop_id = #{group_shop_id}
+</if>
+<if test="actual_price != null">
+    and t.actual_price = #{actual_price}
+</if>
+<if test="pay_price != null">
+    and t.pay_price = #{pay_price}
+</if>
+<if test="pay_id != null">
+    and t.pay_id = #{pay_id}
+</if>
+<if test="pay_channel != null">
+    and t.pay_channel = #{pay_channel}
+</if>
+<if test="gmt_pay != null">
+    and t.gmt_pay = #{gmt_pay}
+</if>
+<if test="ship_no != null">
+    and t.ship_no = #{ship_no}
+</if>
+<if test="ship_code != null">
+    and t.ship_code = #{ship_code}
+</if>
+<if test="gmt_ship != null">
+    and t.gmt_ship = #{gmt_ship}
+</if>
+<if test="gmt_confirm != null">
+    and t.gmt_confirm = #{gmt_confirm}
+</if>
+<if test="province != null">
+    and t.province = #{province}
+</if>
+<if test="city != null">
+    and t.city = #{city}
+</if>
+<if test="county != null">
+    and t.county = #{county}
+</if>
+<if test="address != null">
+    and t.address = #{address}
+</if>
+<if test="phone != null">
+    and t.phone = #{phone}
+</if>
+<if test="consignee != null">
+    and t.consignee = #{consignee}
+</if>
+<if test="mono != null">
+    and t.mono = #{mono}
+</if>
+<if test="distribution_point_id != null">
+    and t.distribution_point_id = #{distribution_point_id}
+</if>
+<if test="admin_mono_level != null">
+    and t.admin_mono_level = #{admin_mono_level}
+</if>
+<if test="admin_mono != null">
+    and t.admin_mono = #{admin_mono}
+</if>
+<if test="refund_reason != null">
+    and t.refund_reason = #{refund_reason}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+</where>
+</select>
+</mapper>

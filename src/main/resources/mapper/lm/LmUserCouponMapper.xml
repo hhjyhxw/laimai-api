@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmUserCouponMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmUserCoupon" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="userId" column="user_id"/>
+     <result property="couponId" column="coupon_id"/>
+     <result property="orderId" column="order_id"/>
+     <result property="useredTime" column="usered_time"/>
+     <result property="startTime" column="start_time"/>
+     <result property="endTime" column="end_time"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,user_id,coupon_id,order_id,usered_time,start_time,end_time,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_user_coupon t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="user_id != null">
+    and t.user_id = #{user_id}
+</if>
+<if test="coupon_id != null">
+    and t.coupon_id = #{coupon_id}
+</if>
+<if test="order_id != null">
+    and t.order_id = #{order_id}
+</if>
+<if test="usered_time != null">
+    and t.usered_time = #{usered_time}
+</if>
+<if test="start_time != null">
+    and t.start_time = #{start_time}
+</if>
+<if test="end_time != null">
+    and t.end_time = #{end_time}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+</mapper>

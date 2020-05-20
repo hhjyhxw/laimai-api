@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmCategoryMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmCategory" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="title" column="title"/>
+     <result property="parentId" column="parent_id"/>
+     <result property="iconUrl" column="icon_url"/>
+     <result property="picUrl" column="pic_url"/>
+     <result property="level" column="level"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,title,parent_id,icon_url,pic_url,level,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_category t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="title != null">
+    and t.title = #{title}
+</if>
+<if test="parent_id != null">
+    and t.parent_id = #{parent_id}
+</if>
+<if test="icon_url != null">
+    and t.icon_url = #{icon_url}
+</if>
+<if test="pic_url != null">
+    and t.pic_url = #{pic_url}
+</if>
+<if test="level != null">
+    and t.level = #{level}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+</mapper>

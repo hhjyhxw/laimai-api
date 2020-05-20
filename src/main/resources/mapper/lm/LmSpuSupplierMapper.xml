@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmSpuSupplierMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmSpuSupplier" id="BaseResultMap">
+     <id property="spuId" column="spu_id"/>
+     <result property="supplierId" column="supplier_id"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+spu_id,supplier_id,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_spu_supplier t
+<where>
+<if test="spu_id != null">
+    and t.spu_id = #{spu_id}
+</if>
+<if test="supplier_id != null">
+    and t.supplier_id = #{supplier_id}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+</mapper>

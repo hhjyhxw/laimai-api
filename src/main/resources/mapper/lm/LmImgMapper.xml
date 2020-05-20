@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmImgMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmImg" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="bizType" column="biz_type"/>
+     <result property="bizId" column="biz_id"/>
+     <result property="url" column="url"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,biz_type,biz_id,url,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_img t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="biz_type != null">
+    and t.biz_type = #{biz_type}
+</if>
+<if test="biz_id != null">
+    and t.biz_id = #{biz_id}
+</if>
+<if test="url != null">
+    and t.url = #{url}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+
+    <select id="getImgs" resultType="java.lang.String">
+        SELECT url FROM lm_img WHERE biz_type = #{bizType} AND biz_id = #{bizId};
+    </select>
+
+    <insert id="insertImgs" parameterType="list">
+        INSERT INTO
+        lm_img
+        (biz_type,biz_id,url,updated_time,created_time)
+        VALUES
+        <foreach collection="list" separator="," item="imgDO" index="i">
+            (
+            #{imgDO.bizType},
+            #{imgDO.bizId},
+            #{imgDO.url},
+            #{imgDO.updatedTime},
+            #{imgDO.createdTime}
+            )
+        </foreach>
+    </insert>
+</mapper>

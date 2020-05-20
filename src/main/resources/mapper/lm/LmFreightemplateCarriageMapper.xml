@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmFreightemplateCarriageMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmFreightemplateCarriage" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="templateId" column="template_id"/>
+     <result property="designatedArea" column="designated_area"/>
+     <result property="freePrice" column="free_price"/>
+     <result property="firstNum" column="first_num"/>
+     <result property="firstMoney" column="first_money"/>
+     <result property="continueNum" column="continue_num"/>
+     <result property="continueMoney" column="continue_money"/>
+     <result property="createdBy" column="created_by"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedBy" column="updated_by"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,template_id,designated_area,free_price,first_num,first_money,continue_num,continue_money,created_by,created_time,updated_by,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_freight_template_carriage t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="template_id != null">
+    and t.template_id = #{template_id}
+</if>
+<if test="designated_area != null">
+    and t.designated_area = #{designated_area}
+</if>
+<if test="free_price != null">
+    and t.free_price = #{free_price}
+</if>
+<if test="first_num != null">
+    and t.first_num = #{first_num}
+</if>
+<if test="first_money != null">
+    and t.first_money = #{first_money}
+</if>
+<if test="continue_num != null">
+    and t.continue_num = #{continue_num}
+</if>
+<if test="continue_money != null">
+    and t.continue_money = #{continue_money}
+</if>
+<if test="created_by != null">
+    and t.created_by = #{created_by}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+<if test="updated_by != null">
+    and t.updated_by = #{updated_by}
+</if>
+</where>
+</select>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmCartMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmCart" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="addressId" column="address_id"/>
+     <result property="skuId" column="sku_id"/>
+     <result property="userId" column="user_id"/>
+     <result property="num" column="num"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,address_id,sku_id,user_id,num,created_time,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_cart t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="address_id != null">
+    and t.address_id = #{address_id}
+</if>
+<if test="sku_id != null">
+    and t.sku_id = #{sku_id}
+</if>
+<if test="user_id != null">
+    and t.user_id = #{user_id}
+</if>
+<if test="num != null">
+    and t.num = #{num}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+</where>
+</select>
+</mapper>

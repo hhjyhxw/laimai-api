@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.icloud.modules.lm.dao.LmCollectMapper">
+
+
+    <!-- 基础map -->
+    <resultMap type="com.icloud.modules.lm.entity.LmCollect" id="BaseResultMap">
+     <id property="id" column="id"/>
+     <result property="collectType" column="collect_type"/>
+     <result property="collectObjectId" column="collect_object_id"/>
+     <result property="userId" column="user_id"/>
+     <result property="createdTime" column="created_time"/>
+     <result property="updatedTime" column="updated_time"/>
+    </resultMap>
+
+   <!-- 基础字段列 -->
+   <sql id="Base_Column_List" >
+id,collect_type,collect_object_id,user_id,created_time,updated_time
+    </sql>
+
+
+<select id="queryMixList" resultMap="BaseResultMap">
+select * from lm_collect t
+<where>
+<if test="id != null">
+    and t.id = #{id}
+</if>
+<if test="collect_type != null">
+    and t.collect_type = #{collect_type}
+</if>
+<if test="collect_object_id != null">
+    and t.collect_object_id = #{collect_object_id}
+</if>
+<if test="user_id != null">
+    and t.user_id = #{user_id}
+</if>
+<if test="created_time != null">
+    and t.created_time = #{created_time}
+</if>
+</where>
+</select>
+
+
+
+    <select id="getCollectAll" resultType="com.icloud.modules.lm.dto.CollectDTO">
+        SELECT
+        c.id as id,
+        c.user_id as userId,
+        c.created_time as createdTime,
+        c.updated_time as updatedTime,
+        c.spu_id as spuId,
+        s.original_price as originalPrice,
+        s.price as price,
+        s.vip_price as vipPrice,
+        s.title as title,
+        s.sales as sales,
+        s.img as img,
+        s.description as description,
+        s.unit as unit,
+        s.status as status
+        from
+        lm_collect as c,
+        lm_spu as s
+        where
+        c.user_id = #{userId}
+        and c.spu_id = s.id
+        limit
+        #{offset},#{size}
+    </select>
+
+    <select id="getCollectById" resultType="com.icloud.modules.lm.dto.CollectDTO">
+        SELECT
+        c.id as id,
+        c.user_id as userId,
+        c.created_time as createdTime,
+        c.updated_time as updatedTime,
+        c.spu_id as spuId,
+        s.original_price as originalPrice,
+        s.price as price,
+        s.vip_price as vipPrice,
+        s.title as title,
+        s.sales as sales,
+        s.img as img,
+        s.description as description,
+        s.unit as unit,
+        s.status as status
+        from
+        lm_collect as c,
+        lm_spu as s
+        where
+        c.user_id = #{userId}
+        and c.spu_id = s.id
+        and c.id = #{collectId}
+        <if test="spuId != null">
+            and c.spu_id = #{spuId}
+        </if>
+    </select>
+
+
+    <select id="getUserCollectSpuIds" resultType="java.lang.String">
+        SELECT spu_id FROM  lm_collect WHERE user_id = #{userId}
+    </select>
+</mapper>

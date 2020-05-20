@@ -1,0 +1,138 @@
+package com.icloud.api.lm.cart;
+
+import com.icloud.api.sevice.category.CategoryBizService;
+import com.icloud.exceptions.ServiceException;
+import com.icloud.modules.lm.dto.CartDTO;
+import com.icloud.modules.lm.service.LmCartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping("/api/cart")
+public class CartController {
+    @Autowired
+    private LmCartService lmCartService;
+
+    @Autowired
+    private CategoryBizService categoryBizService;
+
+    @RequestMapping("/addCartItem")
+    @ResponseBody
+    public Boolean addCartItem(Long skuId, Integer num, Long userId) throws ServiceException {
+        List<CartDO> cartDOS = cartMapper.selectList(
+                new EntityWrapper<CartDO>()
+                        .eq("sku_id", skuId)
+                        .eq("user_id", userId));
+        CartDO cartDO = new CartDO();
+        Date now = new Date();
+        if (!CollectionUtils.isEmpty(cartDOS)) {
+            //若非空
+            cartDO.setId(cartDOS.get(0).getId());
+            cartDO.setNum(cartDOS.get(0).getNum() + num);
+            cartDO.setGmtUpdate(now);
+            return cartMapper.updateById(cartDO) > 0;
+        } else {
+            //不存在，则添加购物车
+            cartDO.setSkuId(skuId);
+            cartDO.setNum(num);
+            cartDO.setUserId(userId);
+            cartDO.setGmtUpdate(now);
+            cartDO.setGmtCreate(now);
+            return cartMapper.insert(cartDO) > 0;
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean subCartItem(Long skuId, Integer num, Long userId) throws ServiceException {
+        List<CartDO> cartDOS = cartMapper.selectList(
+                new EntityWrapper<CartDO>()
+                        .eq("sku_id", skuId)
+                        .eq("user_id", userId));
+
+        CartDO cartDO = new CartDO();
+        if (!CollectionUtils.isEmpty(cartDOS)) {
+            cartDO.setId(cartDOS.get(0).getId());
+            cartDO.setNum(cartDOS.get(0).getNum() - num);
+            if (cartDO.getNum() <= 0) {
+                //直接删除此商品
+                return cartMapper.deleteById(cartDO.getId()) > 0;
+            } else {
+                return cartMapper.updateById(cartDO) > 0;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean removeCartItem(Long cartId, Long userId) throws ServiceException {
+        return cartMapper.delete(
+                new EntityWrapper<CartDO>()
+                        .eq("id", cartId)
+                        .eq("user_id", userId)) > 0;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean removeCartItemBatch(String cartIdList, Long userId) throws ServiceException {
+        if (StringUtils.isEmpty(cartIdList)) {
+            throw new AppServiceException(ExceptionDefinition.PARAM_CHECK_FAILED);
+        }
+        String[] split = cartIdList.split(",");
+        if (split.length == 0) {
+            throw new AppServiceException(ExceptionDefinition.PARAM_CHECK_FAILED);
+        }
+        List<Long> array = new ArrayList<>(split.length);
+        for (String idRaw : split) {
+            array.add(new Long(idRaw));
+        }
+        return cartMapper.delete(
+                new EntityWrapper<CartDO>()
+                        .in("id", array)
+                        .eq("user_id", userId)) > 0;
+    }
+
+    @Override
+    @Transactional
+    public Boolean removeCartAll(Long userId) throws ServiceException {
+        return cartMapper.delete(
+                new EntityWrapper<CartDO>()
+                        .eq("user_id", userId)) > 0;
+    }
+
+    @Override
+    public Integer updateCartItemNum(Long cartId, Integer num, Long userId) throws ServiceException {
+        CartDO cartDO = new CartDO();
+        cartDO.setNum(num);
+        Integer update = cartMapper.update(cartDO,
+                new EntityWrapper<CartDO>()
+                        .eq("id", cartId)
+                        .eq("user_id", userId));
+        if (update > 0) {
+            return num;
+        }
+        throw new AppServiceException(ExceptionDefinition.CART_UPDATE_FAILED);
+    }
+
+    @Override
+    public Integer countCart(Long userId) throws ServiceException {
+        return cartMapper.countCart(userId);
+    }
+
+    @Override
+    public List<CartDTO> getCartList(Long userId) throws ServiceException {
+        List<CartDTO> cartList = cartMapper.getCartList(userId);
+        for (CartDTO cartDTO : cartList) {
+            List<Long> categoryFamily = categoryBizService.getCategoryFamily(cartDTO.getCategoryId());
+            cartDTO.setCategoryIdList(categoryFamily);
+        }
+        return cartList;
+    }
+}

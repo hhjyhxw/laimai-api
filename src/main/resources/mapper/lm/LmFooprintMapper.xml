@@ -48,7 +48,7 @@ select * from lm_foot_print t
         fp.created_time AS createdTime,
         fp.updated_time AS updatedTime
         FROM
-        lm_footprint AS fp,
+        lm_foot_print AS fp,
         lm_spu AS sp
         WHERE
         fp.spu_id = sp.id

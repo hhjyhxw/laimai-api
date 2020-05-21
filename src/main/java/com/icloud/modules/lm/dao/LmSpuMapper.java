@@ -1,7 +1,9 @@
 package com.icloud.modules.lm.dao;
 
-import com.icloud.modules.lm.entity.LmSpu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.icloud.modules.lm.entity.LmSpu;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +16,6 @@ import java.util.Map;
 public interface LmSpuMapper extends BaseMapper<LmSpu> {
 
 	List<LmSpu> queryMixList(Map<String, Object> map);
+
+    public List<LmSpu> getAllPage(Map<String, Object> map,@Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
 }

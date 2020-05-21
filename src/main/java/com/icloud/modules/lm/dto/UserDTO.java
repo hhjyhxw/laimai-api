@@ -12,25 +12,25 @@ public class UserDTO extends SuperDTO {
 
     private String phone;
 
-    private Integer loginType;
+    private String loginType;
 
     private String openId;
 
-    private String nickname;
+    private String nickName;
 
     private String avatarUrl;
 
-    private Integer level;
+    private String level;
 
     private Date birthday;
 
-    private Integer gender;
+    private String gender;
 
     private Date gmtLastLogin;
 
     private String lastLoginIp;
 
-    private Integer status;
+    private String status;
 
     /**
      * 登录成功，包装此参数

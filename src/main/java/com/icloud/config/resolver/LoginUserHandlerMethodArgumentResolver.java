@@ -1,8 +1,10 @@
 package com.icloud.config.resolver;
 
+import com.alibaba.fastjson.JSON;
 import com.icloud.annotation.LoginUser;
 import com.icloud.config.global.Constants;
-import com.icloud.modules.lm.entity.LmUser;
+import com.icloud.modules.lm.dto.UserDTO;
+import com.icloud.modules.lm.enums.UserLoginType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
@@ -23,7 +25,7 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterType().isAssignableFrom(LmUser.class) && parameter.hasParameterAnnotation(LoginUser.class);
+        return parameter.getParameterType().isAssignableFrom(UserDTO.class) && parameter.hasParameterAnnotation(LoginUser.class);
     }
 
     @Override
@@ -35,8 +37,10 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
             return null;
         }
         //获取用户信息
-        LmUser user = (LmUser)object;
-        logger.info("======当前登录用户id:{},昵称：{}",user.getId(),user.getLoginName());
+        UserDTO user = (UserDTO)object;
+        logger.info("user====="+ JSON.toJSONString(user));
+        logger.info("======当前登录用户id:{},昵称：{},登陆类型：{}",user.getId(),user.getNickName(),
+                "0".equals(user.getLoginType())?UserLoginType.REGISTER.getMsg():("1".equals(user.getLoginType())?UserLoginType.MP_WEIXIN.getMsg():"其他登陆方式"));
         return user;
     }
 }

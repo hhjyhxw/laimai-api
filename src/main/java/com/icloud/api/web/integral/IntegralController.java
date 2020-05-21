@@ -58,12 +58,13 @@ public class IntegralController {
             return advertisementDTO;
         }).collect(Collectors.groupingBy(item -> "t" + item.getAdType()));
 
+
         //分类code 4  AdType
         List<AdvertisementDTO> categoryPickAd = adDTOMap.get("t" + AdvertisementType.CATEGORY_PICK.getCode());
         //封装 分类精选 商品
         if (!CollectionUtils.isEmpty(categoryPickAd)) {
             for (AdvertisementDTO item : categoryPickAd) {
-                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 10, new Long(item.getUrl().substring(item.getUrl().lastIndexOf("=") + 1)), "sales", false,null);
+                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 10, new Long(item.getPageUrl().substring(item.getPageUrl().lastIndexOf("=") + 1)), "sales", false,null);
                 item.setData(pickPage.getItems());
             }
         }

@@ -2,8 +2,6 @@ package com.icloud.api.sevice.goods;
 
 import com.aliyun.oss.ServiceException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.icloud.api.sevice.appriaise.AppraiseBizService;
 import com.icloud.api.sevice.category.CategoryBizService;
 import com.icloud.api.sevice.collect.CollectBizService;
@@ -14,6 +12,7 @@ import com.icloud.modules.lm.componts.CacheComponent;
 import com.icloud.modules.lm.conts.Const;
 import com.icloud.modules.lm.dao.LmImgMapper;
 import com.icloud.modules.lm.dao.LmSpuAttributeMapper;
+import com.icloud.modules.lm.dao.LmSpuMapper;
 import com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO;
 import com.icloud.modules.lm.dto.freight.FreightTemplateDTO;
 import com.icloud.modules.lm.dto.goods.SpuDTO;
@@ -31,10 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class GoodsBizService {
@@ -64,6 +60,8 @@ public class GoodsBizService {
 
     @Autowired
     private LmSpuService lmSpuService;
+    @Autowired
+    private LmSpuMapper lmSpuMapper;
     @Autowired
     private LmSkuService lmSkuService;
     @Autowired
@@ -97,10 +95,11 @@ public class GoodsBizService {
 
     public Page<SpuDTO> getGoodsPage(Integer pageNo, Integer pageSize, Long categoryId, String orderBy, Boolean isAsc, String title) throws ApiException {
         QueryWrapper<LmSpu> wrapper = new QueryWrapper<LmSpu>();
-
+        Map<String,Object> params = new HashMap<String,Object>();
 
         if (!StringUtils.isEmpty(title)) {
             wrapper.like("title", title);
+            params.put("title",title);
         } else {
             //若关键字为空，尝试从缓存取列表
             Page objFromCache = cacheComponent.getObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc, Page.class);
@@ -118,7 +117,10 @@ public class GoodsBizService {
             List<LmCategory> childrenList = lmCategoryService.list(new QueryWrapper<LmCategory>().eq("parent_id", categoryId));
             if (CollectionUtils.isEmpty(childrenList)) {
                 //目标节点为叶子节点,即三级类目
-                wrapper.eq("category_id", categoryId);
+
+                LinkedList<Long> childrenIds = new LinkedList<>();
+                childrenIds.add(categoryId);
+                params.put("categoryIds",childrenIds);
             } else {
                 //目标节点存在子节点
                 LinkedList<Long> childrenIds = new LinkedList<>();
@@ -142,13 +144,16 @@ public class GoodsBizService {
                     });
                 }
                 wrapper.in("category_id", childrenIds);
+                params.put("categoryIds",childrenIds);
             }
         }
 
-        wrapper.eq("status", SpuStatusType.SELLING.getCode());
+        wrapper.eq("status", String.valueOf(SpuStatusType.SELLING.getCode()));
+        params.put("status",String.valueOf(SpuStatusType.SELLING.getCode()));
 
-        PageHelper.startPage(pageNo, pageSize);
-        List<LmSpu> spuDOS = lmSpuService.list(wrapper);
+        Integer count = lmSpuMapper.selectCount(wrapper);
+        List<LmSpu> spuDOS = lmSpuMapper.getAllPage(params,pageSize * (pageNo - 1),pageSize);
+//        List<LmSpu> spuDOS = pages.getRecords();
         //组装SPU
         List<SpuDTO> spuDTOList = new ArrayList<>();
         Map<String, String> salesHashAll = cacheComponent.getHashAll(CA_SPU_SALES_HASH);
@@ -163,11 +168,10 @@ public class GoodsBizService {
             }
             spuDTOList.add(spuDTO);
         });
-        PageInfo<SpuDTO> pageInfo = new PageInfo<SpuDTO>(spuDTOList);
-        Page<SpuDTO> page = new Page<SpuDTO>(spuDTOList,pageNo,pageSize,pageInfo.getTotal());
+        Page<SpuDTO> page = new Page<SpuDTO>(spuDTOList,pageNo,pageSize,count);
         if (StringUtils.isEmpty(title)) {
             //若关键字为空，制作缓存
-            cacheComponent.putObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc, pageInfo, Const.CACHE_ONE_DAY);
+            cacheComponent.putObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc, page, Const.CACHE_ONE_DAY);
         }
         return page;
     }

@@ -136,7 +136,7 @@ public class OrderController {
             //加上乐观锁，防止用户重复提交订单
             try {
                 //用户会员等级
-                Integer userLevel = user.getLevel();
+                Integer userLevel = Integer.parseInt(user.getLevel());
                 //参数强校验 START
                 List<OrderRequestSkuDTO> skuList = orderRequest.getSkuList();
                 if (CollectionUtils.isEmpty(skuList) || orderRequest.getTotalPrice() == null) {
@@ -387,7 +387,7 @@ public class OrderController {
             logger.info("订单状态 status=="+status);
             throw new ApiException("订单状态不能支付");
         }
-        Integer loginType = user.getLoginType();
+        Integer loginType = Integer.parseInt(user.getLoginType());
         String appId;
         String tradeType;
         if (UserLoginType.MP_WEIXIN.getCode() == loginType) {

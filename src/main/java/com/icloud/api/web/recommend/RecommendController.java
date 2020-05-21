@@ -1,5 +1,6 @@
 package com.icloud.api.web.recommend;
 
+import com.icloud.annotation.AuthIgnore;
 import com.icloud.api.sevice.recommend.RecommendBizService;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.exceptions.ApiException;
@@ -17,6 +18,7 @@ public class RecommendController {
 
     @RequestMapping("/getRecommendByType")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse getRecommendByType(Integer recommendType, Integer pageNo, Integer pageSize) throws ApiException {
         return new ApiResponse().ok(recommendBizService.getRecommendByType(recommendType,pageNo,pageSize));
     }

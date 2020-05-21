@@ -1,5 +1,6 @@
 package com.icloud.api.web.goods;
 
+import com.icloud.annotation.AuthIgnore;
 import com.icloud.api.sevice.goods.GoodsBizService;
 import com.icloud.api.sevice.groupshop.GroupShopBizService;
 import com.icloud.basecommon.model.ApiResponse;
@@ -23,6 +24,7 @@ public class GoodsController {
 
     @RequestMapping("/getGoodsPage")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse getGoodsPage(Integer pageNo, Integer pageSize, Long categoryId, String orderBy, Boolean isAsc, String title) throws ApiException {
         Page<SpuDTO> page = goodsBizService.getGoodsPage(pageNo, pageSize, categoryId, orderBy, isAsc, title);
         return new ApiResponse().ok(page);
@@ -30,6 +32,7 @@ public class GoodsController {
 
     @RequestMapping("/getGoods")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse getGoods(Long spuId, Long groupShopId, Long userId) throws ApiException {
         //若团购Id不为空，则额外添加团购信息
         SpuDTO goods = goodsBizService.getGoods(spuId, userId);

@@ -1,6 +1,7 @@
 package com.icloud.api.web.category;
 
 
+import com.icloud.annotation.AuthIgnore;
 import com.icloud.api.sevice.category.CategoryBizService;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.exceptions.ApiException;
@@ -27,6 +28,7 @@ public class CategoryController {
 
     @RequestMapping("/categoryList")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse categoryList() throws ApiException {
         List<CategoryDTO> list = categoryBizService.categoryList();
         return new ApiResponse().ok(list);
@@ -42,6 +44,7 @@ public class CategoryController {
 
     @RequestMapping("/getCategoryFamily")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse getCategoryFamily(Long categoryId) throws ApiException{
         List<Long> list = categoryBizService.getCategoryFamily(categoryId);
         return new ApiResponse().ok(list);

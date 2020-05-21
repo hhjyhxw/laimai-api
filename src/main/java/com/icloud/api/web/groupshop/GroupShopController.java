@@ -1,5 +1,6 @@
 package com.icloud.api.web.groupshop;
 
+import com.icloud.annotation.AuthIgnore;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.exceptions.ApiException;
 import com.icloud.modules.lm.dto.goods.GroupShopDTO;
@@ -28,6 +29,7 @@ public class GroupShopController {
      */
     @RequestMapping("/getGroupShopPage")
     @ResponseBody
+    @AuthIgnore
     public ApiResponse getGroupShopPage(Integer pageNo, Integer pageSize) throws ApiException {
         Integer count = lmGroupShopService.count(null);
         List<GroupShopDTO> groupShopPage = lmGroupShopService.getGroupShopPage((pageNo - 1) * pageSize, pageSize);

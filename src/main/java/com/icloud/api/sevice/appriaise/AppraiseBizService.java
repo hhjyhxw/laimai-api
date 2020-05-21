@@ -2,13 +2,13 @@ package com.icloud.api.sevice.appriaise;
 
 
 import com.aliyun.oss.ServiceException;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.icloud.modules.lm.componts.CacheComponent;
 import com.icloud.modules.lm.conts.Const;
 import com.icloud.modules.lm.dao.LmImgMapper;
 import com.icloud.modules.lm.dao.LmUserAppraiseMapper;
 import com.icloud.modules.lm.dto.appraise.AppraiseResponseDTO;
+import com.icloud.modules.lm.entity.LmUserAppraise;
 import com.icloud.modules.lm.enums.BizType;
 import com.icloud.modules.lm.model.Page;
 import com.icloud.modules.lm.service.LmImgService;
@@ -50,13 +50,14 @@ public class AppraiseBizService {
         if (obj != null) {
             return obj;
         }
-        PageHelper.startPage(pageNo, pageSize);
+//        PageHelper.startPage(pageNo, pageSize);
+        Integer count = lmUserAppraiseMapper.selectCount(new QueryWrapper<LmUserAppraise>().eq("spu_id",spuId));
         List<AppraiseResponseDTO> appraiseResponseDTOS = lmUserAppraiseMapper.selectSpuAllAppraise(spuId,pageSize * (pageNo - 1),pageSize);
         for (AppraiseResponseDTO appraiseResponseDTO : appraiseResponseDTOS) {
             appraiseResponseDTO.setImgList(LmImgMapper.getImgs(BizType.COMMENT.getCode(), appraiseResponseDTO.getId()));
         }
-        PageInfo<AppraiseResponseDTO> pageInfo = new PageInfo<AppraiseResponseDTO>(appraiseResponseDTOS);
-        Page<AppraiseResponseDTO> page = new Page<AppraiseResponseDTO>(appraiseResponseDTOS,pageNo,pageSize,pageInfo.getTotal());
+//        PageInfo<AppraiseResponseDTO> pageInfo = new PageInfo<AppraiseResponseDTO>(appraiseResponseDTOS);
+        Page<AppraiseResponseDTO> page = new Page<AppraiseResponseDTO>(appraiseResponseDTOS,pageNo,pageSize,count);
 
         cacheComponent.putObj(cacheKey, page, Const.CACHE_ONE_DAY);
         return page;

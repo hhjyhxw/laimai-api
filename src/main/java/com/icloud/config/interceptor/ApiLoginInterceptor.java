@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.icloud.annotation.AuthIgnore;
 import com.icloud.basecommon.service.redis.RedisService;
 import com.icloud.basecommon.util.lang.StringUtils;
+import com.icloud.common.IpUtil;
 import com.icloud.config.global.Constants;
 import com.icloud.modules.lm.conts.Const;
 import com.icloud.modules.lm.dto.UserDTO;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
+import java.io.*;
 
 @Component
 public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
@@ -36,6 +37,7 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        printlnVisitInfo(request,handler);
         AuthIgnore annotation;
         if(handler instanceof HandlerMethod) {
             annotation = ((HandlerMethod) handler).getMethodAnnotation(AuthIgnore.class);
@@ -65,10 +67,12 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
         }
 
         //2、
-        log.info("redisService===="+redisService);
+//        log.info("redisService===="+redisService);
 //        Object user = redisService.get(accessToken);
         Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
+        log.info("缓存中获取用户信息====="+sessuser);
         UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
+
         if (user==null) {
             log.info("======unimallUser不存在或者已经失效");
             response.reset();
@@ -81,7 +85,7 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }else{
             //用于其他方法获取用户信息
-            request.setAttribute(Constants.USER_KEY, (UserDTO)user);
+            request.setAttribute(Constants.USER_KEY, user);
 //            redisService.set(unionid.toString(), t, LoginUtils.LOGIN_EXPIRY_TIME);  //重新激活登录时间
         }
         log.info("======验证token成功");
@@ -94,4 +98,41 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
 
     }
 
+    private void printlnVisitInfo(HttpServletRequest request,Object handler) throws IOException {
+        // 所有请求第一个进入的方法
+        String reqURL = request.getRequestURL().toString();
+        String ip = IpUtil.getIpAddr(request);
+//        InputStream is = request.getInputStream ();
+//        StringBuilder responseStrBuilder = new StringBuilder ();
+//        BufferedReader streamReader = new BufferedReader (new InputStreamReader(is,"UTF-8"));
+//        String inputStr;
+//        while ((inputStr = streamReader.readLine ()) != null)
+//            responseStrBuilder.append (inputStr);
+//        String parmeter = responseStrBuilder.toString();
+
+        String parmeter = null;
+
+        long startTime = System.currentTimeMillis();
+        request.setAttribute("startTime", startTime);
+        if (handler instanceof HandlerMethod) {
+            StringBuilder sb = new StringBuilder(1000);
+            HandlerMethod h = (HandlerMethod) handler;
+            //Controller 的包名
+            sb.append("\nController: ").append(h.getBean().getClass().getName()).append("\n");
+            //方法名称
+            sb.append("Method    : ").append(h.getMethod().getName()).append("\n");
+            //请求方式  post\put\get 等等
+            sb.append("RequestMethod    : ").append(request.getMethod()).append("\n");
+            //所有的请求参数
+            sb.append("Params    : ").append(parmeter).append("\n");
+            //部分请求链接
+            sb.append("URI       : ").append(request.getRequestURI()).append("\n");
+            //完整的请求链接
+            sb.append("AllURI    : ").append(reqURL).append("\n");
+            //请求方的 ip地址
+            sb.append("request IP: ").append(ip).append("\n");
+
+            log.info(sb.toString());
+        }
+    }
 }

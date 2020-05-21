@@ -10,6 +10,7 @@ import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.basecommon.util.GeneratorUtil;
 import com.icloud.basecommon.util.SHAUtil;
 import com.icloud.basecommon.util.lang.StringUtils;
+import com.icloud.common.IpUtil;
 import com.icloud.config.global.MyPropertitys;
 import com.icloud.config.notify.SMSClient;
 import com.icloud.config.notify.SMSResult;
@@ -32,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -62,6 +64,9 @@ public class UserController {
 
     @Autowired
     private StringRedisTemplate userRedisTemplate;
+
+    @Autowired
+    private HttpServletRequest request;
 
     private OkHttpClient okHttpClient = new OkHttpClient();
 
@@ -209,7 +214,7 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     @AuthIgnore
-    public ApiResponse login(String phone, String password, Integer loginType, String raw, String ip) throws ApiException {
+    public ApiResponse login(String phone, String password, String loginType, String raw, String ip) throws ApiException {
         logger.info("login:phone=="+phone+";password=="+password+";loginType=="+loginType);
         if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(password) || loginType==null) {
             throw new ApiException("参数不正确");
@@ -220,17 +225,17 @@ public class UserController {
             throw new ApiException("无法找到用户");
         }
         //检查帐号是否已经冻结
-        if (userDTO.getStatus() == 0) {
+        if ("0".equals(userDTO.getStatus())) {
             throw new ApiException("账号已冻结");
         }
-        if (!StringUtils.isEmpty(raw) && UserLoginType.contains(loginType)) {
-            if (loginType == UserLoginType.MP_WEIXIN.getCode()) {
+        if (!StringUtils.isEmpty(raw) && UserLoginType.contains(Integer.parseInt(loginType))) {
+            if (Integer.parseInt(loginType) == UserLoginType.MP_WEIXIN.getCode()) {
                 try {
                     JSONObject thirdPartJsonObject = JSONObject.parseObject(raw);
                     String code = thirdPartJsonObject.getString("code");
                     String body = okHttpClient.newCall(new Request.Builder()
-                            .url("https://api.weixin.qq.com/sns/jscode2session?appid=" + (UserLoginType.MP_WEIXIN.getCode() == loginType ? myPropertitys.getWx().getMini().getAppid() : myPropertitys.getWx().getApp().getAppid()) +
-                                    "&secret=" + (UserLoginType.MP_WEIXIN.getCode() == loginType ? myPropertitys.getWx().getMini().getAppsecret() : myPropertitys.getWx().getApp().getAppsecret()) +
+                            .url("https://api.weixin.qq.com/sns/jscode2session?appid=" + (UserLoginType.MP_WEIXIN.getCode() == Integer.parseInt(loginType) ? myPropertitys.getWx().getMini().getAppid() : myPropertitys.getWx().getApp().getAppid()) +
+                                    "&secret=" + (UserLoginType.MP_WEIXIN.getCode() == Integer.parseInt(loginType) ? myPropertitys.getWx().getMini().getAppsecret() : myPropertitys.getWx().getApp().getAppsecret()) +
                                     "&grant_type=authorization_code&js_code=" + code).get().build()).execute().body().string();
                     JSONObject jsonObject = JSONObject.parseObject(body);
                     Integer errcode = jsonObject.getInteger("errcode");
@@ -270,6 +275,7 @@ public class UserController {
     @AuthIgnore
     public ApiResponse thirdPartLogin(Integer loginType, String ip, String raw) throws ApiException {
         try {
+            logger.info("thirdPartLogin:loginType=="+loginType+";ip=="+ip+";raw=="+raw);
             if (UserLoginType.MP_WEIXIN.getCode() == loginType) {
                 return new ApiResponse().ok(wechatLogin(loginType, ip, raw));
             } else if (UserLoginType.H5_WEIXIN.getCode() == loginType) {
@@ -405,6 +411,7 @@ public class UserController {
                 newUserDO.setLastLoginTime(now);
                 newUserDO.setCreatedTime(now);
                 newUserDO.setUpdatedTime(now);
+                newUserDO.setStatus("1");
                 lmUserService.save(newUserDO);
                 //这一步是为了封装上数据库上配置的默认值
                 userDO = (LmUser) lmUserService.getById(newUserDO.getId());
@@ -413,7 +420,7 @@ public class UserController {
                 LmUser userUpdateDO = new LmUser();
                 userUpdateDO.setId(userDO.getId());
                 userUpdateDO.setLastLoginTime(new Date());
-                userUpdateDO.setLastLoginIp(ip);
+                userUpdateDO.setLastLoginIp(IpUtil.getIpAddr(request));
                 lmUserService.updateById(userUpdateDO);
             }
             //检查帐号是否已经冻结
@@ -441,15 +448,14 @@ public class UserController {
      * @param gender
      * @param birthday
      * @param accessToken
-     * @param userId
      * @return
      * @throws ApiException
      */
     @RequestMapping("/syncUserInfo")
     @ResponseBody
-    public ApiResponse syncUserInfo(String nickName, String nickname, String avatarUrl, Integer gender, Long birthday, String accessToken, Long userId) throws ApiException {
+    public ApiResponse syncUserInfo(String nickName, String nickname, String avatarUrl, String gender, Long birthday, String accessToken, @LoginUser UserDTO user) throws ApiException {
         LmUser updateUserDO = new LmUser();
-        updateUserDO.setId(userId);
+        updateUserDO.setId(user.getId());
         updateUserDO.setNickName(StringUtils.isEmpty(nickName) ? nickname: nickName);
         updateUserDO.setAvatarUrl(avatarUrl);
         updateUserDO.setGender(String.valueOf(gender));
@@ -459,10 +465,10 @@ public class UserController {
         if (lmUserService.updateById(updateUserDO)) {
             //更新SESSION缓存
 //            UserDTO user = SessionUtil.getUser();
-            Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
-            UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
+//            Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
+//            user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
             if (!StringUtils.isEmpty(nickName)) {
-                user.setNickname(nickName);
+                user.setNickName(nickName);
             }
             if (!StringUtils.isEmpty(avatarUrl)) {
                 user.setAvatarUrl(avatarUrl);

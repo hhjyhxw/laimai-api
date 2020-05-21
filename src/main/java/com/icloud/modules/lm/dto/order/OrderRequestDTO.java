@@ -1,6 +1,6 @@
 package com.icloud.modules.lm.dto.order;
 
-import com.icloud.modules.lm.entity.LmCoupon;
+import com.icloud.modules.lm.dto.UserCouponDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class OrderRequestDTO {
 
     private Integer totalOriginalPrice;
 
-    private LmCoupon coupon;
+    private UserCouponDTO coupon;
 
     private Long addressId;
 

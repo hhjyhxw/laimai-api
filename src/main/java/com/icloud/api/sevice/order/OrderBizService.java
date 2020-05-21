@@ -73,7 +73,7 @@ public class OrderBizService {
 //
 //    private String wxAppAppid = myPropertitys.getWx().getApp().getAppid();
 
-    public boolean changeOrderStatus(String orderNo, int nowStatus, LmOrder orderDO) throws ApiException {
+    public boolean changeOrderStatus(String orderNo, String nowStatus, LmOrder orderDO) throws ApiException {
         try {
             // 防止传入值为空,导致其余订单被改变
             if(orderNo == null || orderDO == null){
@@ -113,7 +113,7 @@ public class OrderBizService {
         return orderDOS.get(0);
     }
 
-    public OrderDTO getOrderDetail(Long orderId, Long userId) throws Exception {
+    public OrderDTO getOrderDetail(Long orderId, Long userId) throws ApiException {
         QueryWrapper<LmOrder> wrapper = new QueryWrapper<LmOrder>()
                 .eq("id", orderId);
         if (userId != null) {
@@ -143,7 +143,7 @@ public class OrderBizService {
                 LmOrder updateOrderDO = new LmOrder();
                 updateOrderDO.setStatus(String.valueOf(OrderStatusType.REFUNDED.getCode()));
                 updateOrderDO.setUpdatedTime(new Date());
-                changeOrderStatus(orderNo, OrderStatusType.GROUP_SHOP_WAIT.getCode(), updateOrderDO);
+                changeOrderStatus(orderNo,String.valueOf(OrderStatusType.GROUP_SHOP_WAIT.getCode()), updateOrderDO);
                 Long userId = orderDO.getUserId();
                 LmUser userDO = (LmUser)userMapper.selectById(userId);
                 int loginType = Integer.parseInt(userDO.getLoginType());

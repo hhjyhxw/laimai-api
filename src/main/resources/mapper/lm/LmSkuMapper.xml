@@ -72,4 +72,54 @@ select * from lm_sku t
 </if>
 </where>
 </select>
+
+    <update id="decSkuStock">
+        UPDATE lm_sku SET stock = stock - #{stock}, freeze_stock = freeze_stock + #{stock} WHERE id = #{skuId}
+    </update>
+
+    <update id="returnSkuStock">
+        UPDATE lm_sku SET stock = stock + #{stock}, freeze_stock = freeze_stock - #{stock} WHERE id = #{skuId}
+    </update>
+
+    <update id="decSkuFreezeStock">
+        UPDATE lm_sku SET freeze_stock = freeze_stock - #{stock} WHERE id = #{skuId}
+    </update>
+
+    <select id="getSkuDTOById" resultType="com.icloud.modules.lm.dto.goods.SkuDTO">
+        SELECT
+        k.id,
+        k.spu_id AS spuId,
+        k.bar_code AS barCode,
+        p.category_id AS categoryId,
+        k.title,
+        p.title AS spuTitle,
+        k.img,
+        p.img AS spuImg,
+        k.original_price AS originalPrice,
+        k.price,
+        k.vip_price AS vipPrice,
+        k.stock,
+        p.unit,
+        p.status,
+        k.freeze_stock AS freezeStock,
+        k.updated_time AS updatedTime,
+        k.created_time AS createdTime
+        FROM
+        lm_sku AS k,
+        lm_spu AS p
+        WHERE
+        k.id = #{skuId}
+        AND k.spu_id = p.id
+    </select>
+
+    <select id="getSkuIds" resultType="java.lang.Long">
+        SELECT id FROM lm_sku WHERE spu_id = #{spuId}
+    </select>
+
+    <select id="selectSkuIdsBySpuIds" resultType="java.lang.Long">
+        SELECT id FROM lm_sku WHERE spu_id in
+        <foreach collection="ids" separator="," open="(" close=")" item="spuId">
+            #{spuId}
+        </foreach>
+    </select>
 </mapper>

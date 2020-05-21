@@ -26,7 +26,7 @@ public class LmOrderSku implements Serializable {
        private Long id;
    	   	   /* 商品(skuid) */
        @TableField("sku_id")
-       private String skuId;
+       private Long skuId;
    	   	   /* 商品（spuid） */
        @TableField("spu_id")
        private Long spuId;

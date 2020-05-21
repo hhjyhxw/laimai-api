@@ -1,7 +1,10 @@
 package com.icloud.modules.lm.dao;
 
-import com.icloud.modules.lm.entity.LmSku;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.icloud.modules.lm.dto.goods.SkuDTO;
+import com.icloud.modules.lm.entity.LmSku;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +18,21 @@ SKU是物理上不可分割的最小存货单元。也就是说一款商品，�
 public interface LmSkuMapper extends BaseMapper<LmSku> {
 
 	List<LmSku> queryMixList(Map<String, Object> map);
+
+    public SkuDTO getSkuDTOById(Long skuId);
+
+    public Integer decSkuStock(@Param("skuId") Long skuId, @Param("stock") Integer stock);
+
+    public Integer returnSkuStock(@Param("skuId") Long skuId, @Param("stock") Integer stock);
+
+    public Integer decSkuFreezeStock(@Param("skuId") Long skuId, @Param("stock") Integer stock);
+
+    /**
+     * 删除SPUID
+     * @param spuId
+     * @return
+     */
+    public List<Long> getSkuIds(@Param("spuId") Long spuId);
+
+    List<Long> selectSkuIdsBySpuIds(@Param("ids") List<Long> ids);
 }

@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyPropertitys {
 
-
+    //机器编号
+    private String machineNo;
+    //运行环境
+    private String env;
     //微信参数
     private Wx wx;
     //云存储
@@ -93,11 +96,12 @@ public class MyPropertitys {
 
         @Data
         public static class Qcloud{
-            private String appid;
+            private String sign;
+            private int appid;
             private String appkey;
-            private String registerTemplateId;
-            private String bindPhoneTemplateId;
-            private String resetPasswordTemplateId;
+            private int registerTemplateId;
+            private int bindPhoneTemplateId;
+            private int resetPasswordTemplateId;
             private String adminLoginTemplateId;
         }
 

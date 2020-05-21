@@ -148,4 +148,94 @@ select * from lm_order t
 </if>
 </where>
 </select>
+
+
+    <select id="selectOrderPage" resultType="com.icloud.modules.lm.dto.order.OrderDTO">
+        SELECT
+        id,
+        order_no AS orderNo,
+        `status`,
+        actual_price AS actualPrice,
+        created_time AS createdTime
+        FROM
+        lm_order
+        WHERE
+        user_id = #{userId}
+        <if test="status != null and status != '0'">
+            AND `status` = #{status}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{limit}
+
+    </select>
+
+    <select id="countOrder" resultType="java.lang.Long">
+        SELECT
+        count(1)
+        FROM
+        lm_order
+        WHERE
+        user_id = #{userId}
+        <if test="status != null and status != '0'">
+            AND `status` = #{status}
+        </if>
+    </select>
+
+    <select id="selectAreaStatistics" resultType="com.icloud.modules.lm.model.KVModel">
+        SELECT
+        `province` AS `key`,
+        count( 1 ) AS `value`
+        FROM
+        lm_order
+        WHERE
+        `province` IS NOT NULL
+        GROUP BY
+        `province`
+    </select>
+
+    <select id="selectChannelStatistics" resultType="com.icloud.modules.lm.model.KVModel">
+        SELECT
+        `channel` AS `key`,
+        count( 1 ) AS `value`
+        FROM
+        lm_order
+        GROUP BY
+        `channel`
+    </select>
+
+    <select id="selectOrderCountStatistics" resultType="com.icloud.modules.lm.model.KVModel">
+        SELECT
+        DATE_FORMAT( gmt_create, '%Y-%m-%d' ) AS `key`,
+        count( 1 ) AS `value`
+        FROM
+        lm_order AS u
+        WHERE
+        created_time &gt; #{gmtStart}
+        GROUP BY
+        `key`;
+    </select>
+
+    <select id="selectOrderSumStatistics" resultType="com.icloud.modules.lm.model.KVModel">
+        SELECT
+        DATE_FORMAT( gmt_create, '%Y-%m-%d' ) AS `key`,
+        sum( pay_price ) AS `value`
+        FROM
+        lm_order AS u
+        WHERE
+        pay_price IS NOT NULL
+        AND created_time &gt; #{gmtStart}
+        GROUP BY
+        `key`;
+    </select>
+
+    <select id="selectExpireOrderNos" resultType="com.icloud.modules.lm.entity.LmOrder">
+        SELECT
+        id,
+        order_no as orderNo
+        FROM
+        lm_order
+        WHERE
+        `status` = #{status}
+        AND updated_time &lt; #{time}
+    </select>
 </mapper>

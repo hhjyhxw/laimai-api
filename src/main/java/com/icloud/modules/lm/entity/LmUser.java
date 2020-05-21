@@ -63,7 +63,7 @@ public class LmUser implements Serializable {
    	   	   /* 最近登陆ip */
        @TableField("last_login_ip")
        private String lastLoginIp;
-   	   	   /* 状态 1 正常 2禁用 3注销 */
+   	   	   /* 0冻结 状态 1 （激活）正常 2禁用 3注销 */
        @TableField("status")
        private String status;
    	   	   /* 创建人 */

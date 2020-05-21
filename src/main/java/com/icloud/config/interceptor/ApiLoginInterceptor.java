@@ -1,14 +1,17 @@
 package com.icloud.config.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
 import com.icloud.annotation.AuthIgnore;
 import com.icloud.basecommon.service.redis.RedisService;
 import com.icloud.basecommon.util.lang.StringUtils;
 import com.icloud.config.global.Constants;
-import com.icloud.modules.lm.entity.LmUser;
+import com.icloud.modules.lm.conts.Const;
+import com.icloud.modules.lm.dto.UserDTO;
 import com.icloud.modules.lm.service.LmUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -26,6 +29,8 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
     private RedisService redisService;
     @Autowired
     private LmUserService lmUserService;
+    @Autowired
+    private StringRedisTemplate userRedisTemplate;
 
 
     @Override
@@ -61,7 +66,9 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
 
         //2、
         log.info("redisService===="+redisService);
-        Object user = redisService.get(accessToken);
+//        Object user = redisService.get(accessToken);
+        Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
+        UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
         if (user==null) {
             log.info("======unimallUser不存在或者已经失效");
             response.reset();
@@ -74,7 +81,7 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
             return false;
         }else{
             //用于其他方法获取用户信息
-            request.setAttribute(Constants.USER_KEY, (LmUser)user);
+            request.setAttribute(Constants.USER_KEY, (UserDTO)user);
 //            redisService.set(unionid.toString(), t, LoginUtils.LOGIN_EXPIRY_TIME);  //重新激活登录时间
         }
         log.info("======验证token成功");

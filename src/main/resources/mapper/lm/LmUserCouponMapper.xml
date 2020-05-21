@@ -60,4 +60,55 @@ select * from lm_user_coupon t
 </if>
 </where>
 </select>
+
+    <select id="getUserCoupons" resultType="com.icloud.modules.lm.dto.UserCouponDTO">
+        SELECT
+        u.id,
+        u.user_id AS userId,
+        u.coupon_id AS couponId,
+        u.updated_time AS updatedTime,
+        u.created_time AS createdTime,
+        u.end AS gmtEnd,
+        c.title,
+        c.category_id AS categoryId,
+        y.title AS categoryTitle,
+        c.`min`,
+        c.discount
+        FROM
+        lm_user_coupon AS u,
+        lm_coupon AS c
+        LEFT JOIN lm_category AS y ON c.category_id = y.id
+        WHERE
+        u.coupon_id = c.id
+        AND u.user_id = #{userId}
+        AND u.gmt_used IS NULL
+        AND unix_timestamp(u.start) &lt; unix_timestamp(now())
+        AND unix_timestamp(u.end) &gt; unix_timestamp(now())
+    </select>
+
+    <select id="getUserCouponById" resultType="com.icloud.modules.lm.dto.UserCouponDTO">
+        SELECT
+        u.id,
+        u.user_id AS userId,
+        u.coupon_id AS couponId,
+        u.updated_time AS updatedTime,
+        u.created_time AS createdTime,
+        c.title,
+        c.category_id AS categoryId,
+        y.title AS categoryTitle,
+        c.`min`,
+        c.discount
+        FROM
+        lm_user_coupon AS u,
+        lm_coupon AS c
+        LEFT JOIN lm_category AS y ON c.category_id = y.id
+        WHERE
+        u.id = #{userCouponId}
+        AND u.coupon_id = c.id
+        AND u.user_id = #{userId}
+        AND u.usered_time IS NULL
+        AND unix_timestamp(start) &lt; unix_timestamp(now())
+        AND unix_timestamp(end) &gt; unix_timestamp(now())
+    </select>
+
 </mapper>

@@ -92,4 +92,91 @@ select * from lm_user t
 </if>
 </where>
 </select>
+
+    <select id="login" resultType="com.icloud.modules.lm.dto.UserDTO">
+        SELECT
+        id,
+        phone,
+        login_type AS loginType,
+        open_id AS openId,
+        nick_name AS nickname,
+        avatar_url AS avatarUrl,
+        `level`,
+        birthday,
+        gender,
+        last_login_time AS gmtLastLogin,
+        last_login_ip AS lastLoginIp,
+        `status`,
+        c.created_time as createdTime,
+        c.updated_time as updatedTime,
+        FROM
+        lm_user
+        WHERE
+        phone = #{phone} AND `password` = #{cryptPassword}
+    </select>
+
+
+    <select id="getUserList" resultType="com.icloud.modules.lm.entity.LmUser">
+        SELECT
+        id,
+        phone,
+        password,
+        login_type as loginType,
+        open_id as openId,
+        nick_name AS nickname,
+        avatar_url AS avatarUrl,
+        `level`,
+        birthday,
+        gender,
+        gmt_last_login AS gmtLastLogin,
+        last_login_ip AS lastLoginIp,
+        `status`,
+        c.created_time as createdTime,
+        c.updated_time as updatedTime,
+        FROM
+        lm_user
+        WHERE
+        1 = 1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="nickname != null">
+            AND nick_name like concat(concat("%",#{nickname}),"%")
+        </if>
+        <if test="level != null">
+            AND `level` = #{level}
+        </if>
+        <if test="gender != null">
+            AND gender = #{gender}
+        </if>
+        <if test="status != null and status !='' ">
+            AND status = #{status}
+        </if>
+        limit #{offset},#{limit}
+    </select>
+
+
+    <select id="countUser" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        lm_user
+        WHERE
+        1 = 1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+        <if test="nickname != null">
+            AND nick_name like concat(concat("%",#{nickname}),"%")
+        </if>
+        <if test="level != null">
+            AND `level` = #{level}
+        </if>
+        <if test="gender != null">
+            AND gender = #{gender}
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+    </select>
 </mapper>

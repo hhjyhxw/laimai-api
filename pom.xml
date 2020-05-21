@@ -5,8 +5,8 @@
 
     <groupId>com.cloud</groupId>
     <artifactId>laimai-api</artifactId>
-    <!-- <version>1.0.0</version> -->
-    <packaging>war</packaging>
+     <version>1.0.0</version>
+    <packaging>jar</packaging>
 
     <name>laimai-api</name>
 
@@ -519,22 +519,6 @@
             </exclusions>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.github.dreamyoung</groupId>
-            <artifactId>mprelation</artifactId>
-            <version>0.0.3-RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>-->
-
         <!--微信小程序-->
         <!--dependency>
             <groupId>com.github.binarywang</groupId>
@@ -577,6 +561,16 @@
                 </exclusion>
             </exclusions>
 
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.qcloudsms</groupId>
+            <artifactId>qcloudsms</artifactId>
+            <version>1.0.5</version>
         </dependency>
         <!--企业号/企业微信-->
        <!-- <dependency>

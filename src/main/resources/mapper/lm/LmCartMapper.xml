@@ -61,7 +61,7 @@ select * from lm_cart t
         k.spu_id AS spuId,
         p.category_id AS categoryId,
         c.created_time as createdTime,
-        c.updated_time as updatedTime,
+        c.updated_time as updatedTime
         FROM
         lm_cart AS c,
         lm_sku AS k,

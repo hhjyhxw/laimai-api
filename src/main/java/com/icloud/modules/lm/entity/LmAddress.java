@@ -27,19 +27,19 @@ public class LmAddress implements Serializable {
        @TableId(value="id", type= IdType.AUTO)
        private Long id;
 
-       @NotNull
+       @NotNull(message = "省份不能为空")
    	   	   /* 省 */
        @TableField("province")
        private String province;
-    @NotNull
+        @NotNull(message = "城市不能为空")
    	   	   /* 市 */
        @TableField("city")
        private String city;
-    @NotNull
+    @NotNull(message = "区县不能为空")
    	   	   /* 县 */
        @TableField("county")
        private String county;
-      @NotNull
+    @NotNull(message = "详细地址不能为空")
    	   	   /* 详细地址 */
        @TableField("address")
        private String address;
@@ -47,10 +47,10 @@ public class LmAddress implements Serializable {
        @TableField("user_id")
        private Long userId;
    	   	   /* 联系电话 */
-       @NotNull
+     @NotNull(message = "联系电话不能为空")
        @TableField("phone")
        private String phone;
-       @NotNull
+    @NotNull(message = "收件人不能为空")
    	   	   /* 收件人 */
        @TableField("consignee")
        private String consignee;
@@ -58,10 +58,10 @@ public class LmAddress implements Serializable {
        @TableField("is_default")
        private String isDefault;
    	   	   /* 经度 */
-        @NotNull
+//           @NotNull(message = "经度不能为空")
        @TableField("lnt")
        private BigDecimal lnt;
-        @NotNull
+//    @NotNull(message = "纬度不能为空")
    	   	   /* 纬度 */
        @TableField("lat")
        private BigDecimal lat;

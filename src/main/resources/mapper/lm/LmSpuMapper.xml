@@ -99,7 +99,30 @@ select * from lm_spu t
             </if>
             <if test="categoryIds != null" >
                 and t.category_id in
-                <foreach item="item" index="index" collection="categorys" open="("
+                <foreach item="item" index="index" collection="categoryIds" open="("
+                         separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getAllPageByMap"  resultMap="BaseResultMap">
+        select * from lm_spu t
+        <where>
+            <if test="title != null">
+                and t.title like concat(concat('%',#{title}),'%')
+            </if>
+            <if test="freight_template_id != null">
+                and t.freight_template_id = #{freight_template_id}
+            </if>
+            <if test="status != null and status!='' ">
+                and t.status = #{status}
+            </if>
+            <if test="categoryIds != null" >
+                and t.category_id in
+                <foreach item="item" index="index" collection="categoryIds" open="("
                          separator="," close=")">
                     #{item}
                 </foreach>

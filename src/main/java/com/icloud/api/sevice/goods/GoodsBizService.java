@@ -152,7 +152,10 @@ public class GoodsBizService {
         params.put("status",String.valueOf(SpuStatusType.SELLING.getCode()));
 
         Integer count = lmSpuMapper.selectCount(wrapper);
-        List<LmSpu> spuDOS = lmSpuMapper.getAllPage(params,pageSize * (pageNo - 1),pageSize);
+        params.put("offset",pageSize * (pageNo - 1));
+        params.put("pageSize",pageSize);
+        List<LmSpu> spuDOS = lmSpuMapper.getAllPageByMap(params);
+//        List<LmSpu> spuDOS = lmSpuMapper.getAllPage(params,pageSize * (pageNo - 1),pageSize);
 //        List<LmSpu> spuDOS = pages.getRecords();
         //组装SPU
         List<SpuDTO> spuDTOList = new ArrayList<>();
@@ -229,7 +232,19 @@ public class GoodsBizService {
         SpuDTO spuDTO = new SpuDTO();
         BeanUtils.copyProperties(spuDO, spuDTO);
         spuDTO.setImgList(lmImgMapper.getImgs(BizType.GOODS.getCode(), spuId));
+        if(spuDTO.getImgList()==null || spuDTO.getImgList().size()==0){
+            List<String> imgList = new ArrayList<String>();
+            imgList.add(spuDTO.getImg());
+            spuDTO.setImgList(imgList);
+        }
         List<LmSku> skuDOList = lmSkuService.list(new QueryWrapper<LmSku>().eq("spu_id", spuId));
+        if(skuDOList!=null && skuDOList.size()>0){
+            for (LmSku lmSku:skuDOList){
+                if(lmSku.getImg()==null || "".equals(lmSku.getImg())){
+                    lmSku.setImg(spuDTO.getImg());
+                }
+            }
+        }
         spuDTO.setSkuList(skuDOList);
         //类目族 叶子分类id 及分类id...
         spuDTO.setCategoryIds(categoryBizService.getCategoryFamily(spuDO.getCategoryId()));
@@ -243,8 +258,10 @@ public class GoodsBizService {
         List<LmSpuAttribute> spuAttributeList = lmSpuAttributeMapper.selectList(new QueryWrapper<LmSpuAttribute>().eq("spu_id", spuId));
         spuDTO.setAttributeList(spuAttributeList);
         //获取运费模板
-        FreightTemplateDTO templateDTO = freightBizService.getTemplateById(spuDO.getFreightTemplateId());
-        spuDTO.setFreightTemplate(templateDTO);
+        if(spuDO.getFreightTemplateId()!=null){
+            FreightTemplateDTO templateDTO = freightBizService.getTemplateById(spuDO.getFreightTemplateId());
+            spuDTO.setFreightTemplate(templateDTO);
+        }
         //放入缓存
         cacheComponent.putObj(CA_SPU_PREFIX + spuId, spuDTO, Const.CACHE_ONE_DAY / 2);
         packSpuCollectInfo(spuDTO, userId);

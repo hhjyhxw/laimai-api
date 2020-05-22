@@ -14,6 +14,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller基类
@@ -153,5 +155,26 @@ public abstract class AppBaseController extends RequestUtil {
 		 line = sb.toString();
 		 return line;
 	}
+
+	public static void println(Map<Object,Object> map,String method){
+        logger.info("/////////////"+method+"_start//////////////////");
+        for(Map.Entry<Object,Object> entry : map.entrySet()){
+            Object mapKey = entry.getKey();
+            Object mapValue = entry.getValue();
+            logger.info("参数::"+mapKey+"======"+mapValue);
+        }
+        logger.info("/////////////"+method+"_end//////////////////");
+    }
+
+
+
+        public static Map<Object,Object> getMap(Object key,Object value,Map<Object,Object> map){
+	        if(map == null){
+                map = new HashMap<>();
+            }
+            map.put(key,value);
+            return map;
+        }
+
 
 }

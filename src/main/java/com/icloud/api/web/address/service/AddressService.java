@@ -40,11 +40,12 @@ public class AddressService {
                 }
             }
             if(address.getId()!=null){
-                address.setCreatedTime(new Date());
+                address.setUpdatedTime(new Date());
+                return lmAddressService.updateById(address);
             }else {
-                address.setUpdatedTime(new Date(0));
+                address.setCreatedTime(new Date());
+                return lmAddressService.save(address);
             }
-           return lmAddressService.saveOrUpdate(address);
     }
 
     /**

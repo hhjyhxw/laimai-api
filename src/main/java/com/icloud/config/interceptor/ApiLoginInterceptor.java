@@ -71,10 +71,21 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
 //        Object user = redisService.get(accessToken);
         Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
         log.info("缓存中获取用户信息====="+sessuser);
-        UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
+        if(sessuser==null){
+            log.info("======读取用户登陆缓存为空");
+            response.reset();
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/json");
+            PrintWriter out = response.getWriter();
+            out.print("{\"code\":1000,\"message\":\"用户没有登录,请先登录！\"}");
+            out.flush();
+            out.close();
+            return false;
+        }
 
+        UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
         if (user==null) {
-            log.info("======unimallUser不存在或者已经失效");
+            log.info("======user不存在或者已经失效");
             response.reset();
             response.setCharacterEncoding("utf-8");
             response.setContentType("application/json");

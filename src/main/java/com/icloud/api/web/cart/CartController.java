@@ -36,8 +36,6 @@ public class CartController {
     public ApiResponse addCartItem(Long skuId, Integer num, @LoginUser UserDTO user) throws ApiException {
         List<LmCart> cartDOS = lmCartService.list(
                 new QueryWrapper<LmCart>().eq("sku_id", skuId).eq("user_id", user.getId()));
-
-
         LmCart cartDO = new LmCart();
         Date now = new Date();
         if (!CollectionUtils.isEmpty(cartDOS)) {
@@ -139,8 +137,8 @@ public class CartController {
 
     @RequestMapping("/getCartList")
     @ResponseBody
-    public ApiResponse getCartList(Long userId) throws ServiceException {
-        List<CartDTO> cartList = lmCartService.getCartList(userId);
+    public ApiResponse getCartList(@LoginUser UserDTO user) throws ServiceException {
+        List<CartDTO> cartList = lmCartService.getCartList(user.getId());
         for (CartDTO cartDTO : cartList) {
             List<Long> categoryFamily = categoryBizService.getCategoryFamily(cartDTO.getCategoryId());
             cartDTO.setCategoryIdList(categoryFamily);

@@ -18,4 +18,6 @@ public interface LmSpuMapper extends BaseMapper<LmSpu> {
 	List<LmSpu> queryMixList(Map<String, Object> map);
 
     public List<LmSpu> getAllPage(Map<String, Object> map,@Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+
+    List<LmSpu> getAllPageByMap(Map<String, Object> params);
 }

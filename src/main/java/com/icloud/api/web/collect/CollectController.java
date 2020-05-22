@@ -57,7 +57,7 @@ public class CollectController {
                 .eq("user_id", user.getId())
                 .eq("collect_object_id", spuId));
         if (!CollectionUtils.isEmpty(collectDOS)) {
-            throw new ApiException("已评论");
+            throw new ApiException("已收藏");
         }
         LmCollect collectDO = new LmCollect();
         Date now = new Date();
@@ -100,6 +100,8 @@ public class CollectController {
     @RequestMapping("/getCollectAll")
     @ResponseBody
     public ApiResponse getCollectAll(@LoginUser UserDTO user,Integer pageSize,Integer pageNo) throws ApiException{
+        pageNo=pageNo==null?1:pageNo;
+        pageSize=pageSize==null?15:pageSize;
         Integer count = lmCollectService.count(new QueryWrapper<LmCollect>().eq("user_id", user.getId()));
         Integer offset = pageSize * (pageNo - 1);
         List<CollectDTO> collectAll = lmCollectService.getCollectAll(user.getId(), offset, pageSize);

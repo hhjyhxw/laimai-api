@@ -17,7 +17,9 @@ import com.icloud.api.sevice.user.UserBizService;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.basecommon.util.GeneratorUtil;
 import com.icloud.basecommon.util.lang.StringUtils;
+import com.icloud.basecommon.web.AppBaseController;
 import com.icloud.common.IpUtil;
+import com.icloud.common.util.StringUtil;
 import com.icloud.config.global.MyPropertitys;
 import com.icloud.exceptions.ApiException;
 import com.icloud.executor.GlobalExecutor;
@@ -51,7 +53,8 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api/order")
-public class OrderController {
+public class OrderController extends AppBaseController {
+
 
     @Autowired
     private HttpServletRequest request;
@@ -124,15 +127,23 @@ public class OrderController {
 
     /**
      * 提交订单
-     * @param orderRequest
+     * @param orderRequestStr
      * @param channel
      * @return
      * @throws ApiException
      */
     @RequestMapping("/takeOrder")
     @ResponseBody
-    public ApiResponse takeOrder(OrderRequestDTO orderRequest, String channel,@LoginUser UserDTO user) throws ApiException {
+    public ApiResponse takeOrder(String orderRequestStr, String channel, @LoginUser UserDTO user) throws ApiException {
         if (lockComponent.tryLock(TAKE_ORDER_LOCK + user.getId(), 20)) {
+
+            Map map = getMap("orderRequestStr", orderRequestStr,null);
+            getMap("channel", channel,null);
+            println(map,"takeOrder");
+            if(!StringUtil.checkStr(orderRequestStr)){
+                throw new ApiException("orderRequestStr参数为空");
+            }
+            OrderRequestDTO orderRequest = JSON.parseObject(orderRequestStr,OrderRequestDTO.class);
             //加上乐观锁，防止用户重复提交订单
             try {
                 //用户会员等级

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by rize on 2019/7/6.
  */
 @Data
-public class OrderRequestDTO {
+public class    OrderRequestDTO {
 
     private List<OrderRequestSkuDTO> skuList;
 

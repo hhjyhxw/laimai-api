@@ -109,8 +109,13 @@ public class GoodsBizService {
         }
 
         if (orderBy != null && isAsc != null) {
-            if(isAsc==true) wrapper.orderByAsc(orderBy);
-            else wrapper.orderByDesc(orderBy);
+            if(isAsc==true) {
+                wrapper.orderByAsc(orderBy);
+                params.put("orderByAsc",orderBy);
+            }else{
+                wrapper.orderByDesc(orderBy);
+                params.put("orderByDesc",orderBy);
+            }
         }
         //分类id 不为空，也不是根 0 节点
         if (categoryId != null && categoryId != 0L) {
@@ -203,11 +208,10 @@ public class GoodsBizService {
     /**
      * 获取商品名称
      * @param spuId
-     * @param userId
      * @return
      * @throws ServiceException
      */
-    public SpuDTO getGoods(Long spuId, Long userId) throws ServiceException {
+    public SpuDTO getGoods(Long spuId,Long userId) throws ServiceException {
         //虫缓存获取
         SpuDTO spuDTOFromCache = cacheComponent.getObj(CA_SPU_PREFIX + spuId, SpuDTO.class);
         if (spuDTOFromCache != null) {
@@ -215,7 +219,7 @@ public class GoodsBizService {
             //获取第一页评论
             Page<AppraiseResponseDTO> spuAppraise = appraiseBizService.getSpuAllAppraise(spuId, 1, 10);
             spuDTOFromCache.setAppraisePage(spuAppraise);
-            if (userId != null && userId != 0l) {
+            if (userId!=null && userId!= 0) {
                 footprintBizService.addOrUpdateFootprint(userId, spuId);
             }
 //            if (userId != null && userId == 0l) {
@@ -268,7 +272,7 @@ public class GoodsBizService {
         //获取第一页评论
         Page<AppraiseResponseDTO> spuAppraise = appraiseBizService.getSpuAllAppraise(spuId, 1, 10);
         spuDTO.setAppraisePage(spuAppraise);
-        if (userId != null) {
+        if (userId!=null && userId!= 0) {
             footprintBizService.addOrUpdateFootprint(userId, spuId);
         }
         return spuDTO;

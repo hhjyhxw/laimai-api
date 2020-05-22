@@ -128,6 +128,12 @@ select * from lm_spu t
                 </foreach>
             </if>
         </where>
+        <if test="orderByAsc != null and orderByAsc!='' ">
+            ORDER BY ${orderByAsc} asc
+        </if>
+        <if test="orderByDesc != null and orderByDesc!='' ">
+            ORDER BY ${orderByDesc} desc
+        </if>
         limit #{offset},#{pageSize}
     </select>
 

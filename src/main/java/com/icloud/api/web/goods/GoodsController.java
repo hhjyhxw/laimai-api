@@ -1,11 +1,13 @@
 package com.icloud.api.web.goods;
 
 import com.icloud.annotation.AuthIgnore;
+import com.icloud.annotation.LoginUser;
 import com.icloud.api.sevice.goods.GoodsBizService;
 import com.icloud.api.sevice.groupshop.GroupShopBizService;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.basecommon.web.AppBaseController;
 import com.icloud.exceptions.ApiException;
+import com.icloud.modules.lm.dto.UserDTO;
 import com.icloud.modules.lm.dto.goods.SpuDTO;
 import com.icloud.modules.lm.model.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ public class GoodsController extends AppBaseController {
         getMap("pageSize", pageSize,map);
         getMap("categoryId", categoryId,map);
         getMap("orderBy", orderBy,map);
+        getMap("isAsc", isAsc,map);
         getMap("title", title,map);
         println(map,"getGoodsPage");
         Page<SpuDTO> page = goodsBizService.getGoodsPage(pageNo, pageSize, categoryId, orderBy, isAsc, title);
@@ -44,13 +47,13 @@ public class GoodsController extends AppBaseController {
     @RequestMapping("/getGoods")
     @ResponseBody
     @AuthIgnore
-    public ApiResponse getGoods(Long spuId, Long groupShopId, Long userId) throws ApiException {
+    public ApiResponse getGoods(Long spuId, Long groupShopId, @LoginUser UserDTO user) throws ApiException {
         Map map = getMap("spuId", spuId,null);
         getMap("groupShopId", groupShopId,map);
-        getMap("userId", userId,map);
+        getMap("userId", user!=null?user.getId():null,map);
         println(map,"getGoods");
         //若团购Id不为空，则额外添加团购信息
-        SpuDTO goods = goodsBizService.getGoods(spuId, userId);
+        SpuDTO goods = goodsBizService.getGoods(spuId, user!=null?user.getId():null);
         if (groupShopId != null) {
             goods.setGroupShop(groupShopBizService.getGroupShopById(groupShopId));
         }

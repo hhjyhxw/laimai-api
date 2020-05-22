@@ -33,6 +33,9 @@ public class FreightTemplateController extends AppBaseController {
     public ApiResponse getFreightMoney(@LoginUser UserDTO user, OrderRequestDTO orderRequestDTO) throws ApiException {
                Map map = getMap("orderRequestDTO", JSON.toJSONString(orderRequestDTO),null);
         println(map,"getFreightMoney");
+        if(orderRequestDTO==null || orderRequestDTO.getSkuList()==null || orderRequestDTO.getSkuList().size()==0){
+            return new ApiResponse().ok(0);
+        }
         Integer totalFee = freightBizService.getFreightMoney(orderRequestDTO);
         return new ApiResponse().ok(totalFee);
     }

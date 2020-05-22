@@ -64,7 +64,7 @@ select * from lm_collect t
         lm_spu as s
         where
         c.user_id = #{userId}
-        and c.spu_id = s.id
+        and c.collect_object_id = s.id
         limit
         #{offset},#{size}
     </select>

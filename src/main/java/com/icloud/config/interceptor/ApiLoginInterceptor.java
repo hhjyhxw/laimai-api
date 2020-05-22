@@ -38,6 +38,12 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         printlnVisitInfo(request,handler);
+
+        //从header中获取token
+        //1、
+        String accessToken = request.getHeader("accessToken");
+        log.info("======accessToken:{}",accessToken);
+
         AuthIgnore annotation;
         if(handler instanceof HandlerMethod) {
             annotation = ((HandlerMethod) handler).getMethodAnnotation(AuthIgnore.class);
@@ -46,12 +52,20 @@ public class ApiLoginInterceptor extends HandlerInterceptorAdapter {
         }
         //如果有@IgnoreAuth注解，则不验证token
         if(annotation != null){
+            //不是必须登陆页面的 加载登陆用户数据
+            if (!StringUtils.isBlank(accessToken)) {
+                Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
+                if (sessuser!=null) {
+                    UserDTO user = JSONObject.parseObject(sessuser.toString(),UserDTO.class);
+                    if(user!=null){
+                        request.setAttribute(Constants.USER_KEY, user);
+                    }
+                }
+            }
             return true;
         }
-        //从header中获取token
-        //1、
-        String accessToken = request.getHeader("accessToken");
-        log.info("======accessToken:{}",accessToken);
+
+
         //token为空
         if (StringUtils.isBlank(accessToken)) {
             log.info("======accessToken为空，访问失败");

@@ -89,7 +89,7 @@ public class AddressController extends AppBaseController {
 
     @RequestMapping("/getDefAddress")
     @ResponseBody
-    public ApiResponse getDefAddress(Long userId,@LoginUser UserDTO user) throws ApiException {
+    public ApiResponse getDefAddress(@LoginUser UserDTO user) throws ApiException {
         return new ApiResponse().ok(addressService.getDefAddress(user.getId()));
     }
 

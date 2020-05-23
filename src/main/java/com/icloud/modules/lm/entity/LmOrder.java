@@ -67,8 +67,8 @@ public class LmOrder implements Serializable {
        @TableField("pay_channel")
        private String payChannel;
    	   	   /* 支付时间 */
-       @TableField("gmt_pay")
-       private Date gmtPay;
+       @TableField("pay_time")
+       private Date payTime;
    	   	   /* 物流单号 */
        @TableField("ship_no")
        private String shipNo;
@@ -76,11 +76,11 @@ public class LmOrder implements Serializable {
        @TableField("ship_code")
        private String shipCode;
    	   	   /* 发货时间 */
-       @TableField("gmt_ship")
-       private Date gmtShip;
+       @TableField("ship_time")
+       private Date shipTime;
    	   	   /* 确认收货时间 */
-       @TableField("gmt_confirm")
-       private String gmtConfirm;
+       @TableField("confirm_time")
+       private Date confirmTime;
    	   	   /* 省 */
        @TableField("province")
        private String province;

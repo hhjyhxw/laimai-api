@@ -19,6 +19,7 @@ import com.icloud.modules.lm.entity.LmOrderSku;
 import com.icloud.modules.lm.entity.LmUser;
 import com.icloud.modules.lm.enums.OrderStatusType;
 import com.icloud.modules.lm.enums.UserLoginType;
+import com.icloud.modules.lm.service.LmOrderService;
 import com.icloud.modules.lm.service.LmOrderSkuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +61,8 @@ public class OrderBizService {
 
     @Autowired
     private LmOrderSkuService lmOrderSkuService;
+    @Autowired
+    private LmOrderService lmOrderService;
 
     @Autowired
     private LmUserMapper userMapper;
@@ -106,7 +109,7 @@ public class OrderBizService {
         if (userId != null) {
             wrapper.eq("user_id", userId);
         }
-        List<LmOrder> orderDOS = orderMapper.selectList(wrapper);
+        List<LmOrder> orderDOS = lmOrderService.list(wrapper);
         if (CollectionUtils.isEmpty(orderDOS)) {
             throw new ApiException("订单不存在");
         }

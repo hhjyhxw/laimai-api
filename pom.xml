@@ -457,11 +457,11 @@
             <groupId>org.apache.velocity</groupId>
             <version>${velocity.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.4.11-java7</version>
-        </dependency>
+        </dependency>-->
 
         <!-- 微信支付 -->
         <dependency>

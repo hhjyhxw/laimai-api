@@ -363,6 +363,8 @@ public class OrderController extends AppBaseController {
     @RequestMapping("/getOrderPage")
     @ResponseBody
     public ApiResponse getOrderPage(Integer pageNo, Integer pageSize, String status,@LoginUser UserDTO user) throws ApiException {
+        pageNo = pageNo==null?1:pageNo;
+        pageSize = pageSize==null?15:pageSize;
         List<OrderDTO> orderDTOList = lmOrderService.selectOrderPage(status, (pageNo - 1) * pageSize, pageSize, user.getId());
         Long count = lmOrderService.countOrder(status, (pageNo - 1) * pageSize, pageSize, user.getId());
         //封装SKU

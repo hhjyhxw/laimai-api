@@ -21,11 +21,11 @@
      <result property="payPrice" column="pay_price"/>
      <result property="payId" column="pay_id"/>
      <result property="payChannel" column="pay_channel"/>
-     <result property="gmtPay" column="gmt_pay"/>
+     <result property="payTime" column="pay_time"/>
      <result property="shipNo" column="ship_no"/>
      <result property="shipCode" column="ship_code"/>
-     <result property="gmtShip" column="gmt_ship"/>
-     <result property="gmtConfirm" column="gmt_confirm"/>
+     <result property="shipTime" column="ship_time"/>
+     <result property="confirmTime" column="confirm_time"/>
      <result property="province" column="province"/>
      <result property="city" column="city"/>
      <result property="county" column="county"/>
@@ -95,20 +95,11 @@ select * from lm_order t
 <if test="pay_channel != null">
     and t.pay_channel = #{pay_channel}
 </if>
-<if test="gmt_pay != null">
-    and t.gmt_pay = #{gmt_pay}
-</if>
 <if test="ship_no != null">
     and t.ship_no = #{ship_no}
 </if>
 <if test="ship_code != null">
     and t.ship_code = #{ship_code}
-</if>
-<if test="gmt_ship != null">
-    and t.gmt_ship = #{gmt_ship}
-</if>
-<if test="gmt_confirm != null">
-    and t.gmt_confirm = #{gmt_confirm}
 </if>
 <if test="province != null">
     and t.province = #{province}
@@ -161,7 +152,7 @@ select * from lm_order t
         lm_order
         WHERE
         user_id = #{userId}
-        <if test="status != null and status != '0'">
+        <if test="status != null and status != ''">
             AND `status` = #{status}
         </if>
         ORDER BY id DESC

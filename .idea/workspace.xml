@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6fbc680-6164-4f33-9b24-94a00587f493" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_11_java7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_xstream_xstream_1_4_10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/icloud/api/web/geographic/LocationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laimai-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/laimai-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/api/sevice/order/OrderBizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/api/sevice/order/OrderBizService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/api/web/order/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/api/web/order/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/lm/LmOrderMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/lm/LmOrderMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/basecommon/util/BaiduMapUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/basecommon/util/BaiduMapUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmDistributionPointMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmDistributionPointMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmDistributionPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmDistributionPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmDistributionPointService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmDistributionPointService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/lm/LmDistributionPointMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/lm/LmDistributionPointMapper.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,38 +30,94 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/geographic/LocationController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="26" selection-start-line="26" selection-end-line="27" selection-end-column="66" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/icloud/DistributionPointTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/AddressController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="89" column="35" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="35" />
+            <state relative-caret-position="200">
+              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/service/AddressService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="159" column="32" selection-start-line="159" selection-start-column="32" selection-end-line="159" selection-end-column="32" />
+            <state relative-caret-position="-750" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-825" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmDistributionPointService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="24" column="30" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmAddress.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/user/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+            <state relative-caret-position="502">
+              <caret line="322" column="133" lean-forward="true" selection-start-line="322" selection-start-column="23" selection-end-line="322" selection-end-column="133" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/List.java">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.2.0.RELEASE/spring-data-redis-2.2.0.RELEASE.jar!/org/springframework/data/redis/core/ValueOperations.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="543" column="6" selection-start-line="543" selection-start-column="6" selection-end-line="543" selection-end-column="6" />
+            <state relative-caret-position="175">
+              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/interceptor/ApiLoginInterceptor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="43" column="62" lean-forward="true" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -145,14 +200,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmUserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/appraise/AppraiseController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/appraise/service/AppraiseService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/footprint/FootprintController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmSkuMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmSkuMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmUserCouponMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmUserCouponService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/config/global/MyPropertitys.java" />
@@ -164,14 +211,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmUserCouponMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmUserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application-prod.yml" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/AdvertisementDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/integral/IntegralController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/category/CategoryController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/groupshop/GroupShopController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/recommend/RecommendController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/sevice/appriaise/AppraiseBizService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/config/resolver/LoginUserHandlerMethodArgumentResolver.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/user/UserController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmFooprintMapper.xml" />
@@ -196,6 +241,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/order/OrderController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmOrderMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/AddressController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/basecommon/util/BaiduMapUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmDistributionPoint.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/lm/LmDistributionPointMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmDistributionPointMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmDistributionPointService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/icloud/api/web/geographic/LocationController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/icloud/MybatisPlusTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/icloud/DistributionPointTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
       </list>
     </option>
   </component>
@@ -301,18 +356,7 @@
               <item name="icloud" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="address" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="laimai-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="icloud" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
@@ -352,9 +396,22 @@
               <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
               <item name="laimai-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laimai-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="laimai-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="icloud" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="laimai-api" type="b2602c69:ProjectViewProjectNode" />
@@ -397,12 +454,9 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\config" />
-      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\wx\config" />
-      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud" />
-      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\api\sevice" />
-      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\modules\lm\enums" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\myproject\web-project\src\main\resources\statics\third_plugin" />
+      <recent name="D:\project\myproject\web-project\src\main\resources\statics\js" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.icloud.executor" />
@@ -411,9 +465,12 @@
       <recent name="com.icloud.api.lm.recommend" />
       <recent name="com.icloud.api.lm.order" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\project\myproject\web-project\src\main\resources\statics\third_plugin" />
-      <recent name="D:\project\myproject\web-project\src\main\resources\statics\js" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\config" />
+      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\wx\config" />
+      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud" />
+      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\api\sevice" />
+      <recent name="D:\project\myproject\laimai-api\src\main\java\com\icloud\modules\lm\enums" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -428,7 +485,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.laimai-api-1.0.0.jar">
+  <component name="RunManager" selected="JUnit.DistributionPointTest.testSelect">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.icloud.Application" />
       <module name="laimai-api" />
@@ -442,12 +499,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DistributionPointTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="laimai-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.icloud.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.icloud" />
+      <option name="MAIN_CLASS_NAME" value="com.icloud.DistributionPointTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DistributionPointTest.testSelect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="laimai-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.icloud.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.icloud" />
+      <option name="MAIN_CLASS_NAME" value="com.icloud.DistributionPointTest" />
+      <option name="METHOD_NAME" value="testSelect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="laimai-api-1.0.0.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/target/laimai-api-1.0.0.jar" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DistributionPointTest.testSelect" />
+        <item itemvalue="JUnit.DistributionPointTest" />
         <item itemvalue="JAR Application.laimai-api-1.0.0.jar" />
         <item itemvalue="Application.Application" />
       </list>
@@ -475,21 +565,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LongCoinComsueTest_apiTest - 2020.04.22 at 14h 11m 33s.xml">
-      <configuration name="LongCoinComsueTest.apiTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LongCoinComsueTest_apiTest - 2020.04.22 at 14h 13m 27s.xml">
-      <configuration name="LongCoinComsueTest.apiTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LongCoinComsueTest_apiTest - 2020.04.22 at 14h 22m 07s.xml">
-      <configuration name="LongCoinComsueTest.apiTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LongCoinComsueTest_apiTest - 2020.04.22 at 14h 25m 21s.xml">
-      <configuration name="LongCoinComsueTest.apiTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LongCoinComsueTest_apiTest - 2020.04.22 at 14h 45m 25s.xml">
-      <configuration name="LongCoinComsueTest.apiTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LongCoinQueryTest - 2020.04.24 at 14h 39m 29s.xml">
       <configuration name="LongCoinQueryTest" configurationId="JUnit" />
     </history-entry>
@@ -504,6 +579,21 @@
     </history-entry>
     <history-entry file="LongCoinChargeTest_apiTest - 2020.04.29 at 18h 20m 01s.xml">
       <configuration name="LongCoinChargeTest.apiTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DistributionPointTest_testSelect - 2020.05.23 at 21h 55m 50s.xml">
+      <configuration name="DistributionPointTest.testSelect" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DistributionPointTest - 2020.05.23 at 21h 56m 39s.xml">
+      <configuration name="DistributionPointTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DistributionPointTest - 2020.05.23 at 21h 58m 13s.xml">
+      <configuration name="DistributionPointTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DistributionPointTest - 2020.05.23 at 21h 59m 04s.xml">
+      <configuration name="DistributionPointTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DistributionPointTest_testSelect - 2020.05.23 at 22h 01m 25s.xml">
+      <configuration name="DistributionPointTest.testSelect" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView" selected-index="2">
@@ -529,9 +619,9 @@
       <window_info id="Capture Tool" order="7" />
       <window_info active="true" anchor="bottom" id="Find" order="0" sideWeight="0.49731904" visible="true" weight="0.1855524" />
       <window_info anchor="bottom" id="JRebel Executor" order="1" sideWeight="0.8914209" weight="0.43342775" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8491957" weight="0.20963173" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8491957" visible="true" weight="0.26203966" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932975" weight="0.5311615" />
-      <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.4966488" weight="0.31444758" />
+      <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.4966488" weight="0.34419262" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -546,14 +636,14 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" sideWeight="0.49858356" visible="true" weight="0.12734585" />
+      <window_info anchor="right" id="Maven" order="4" sideWeight="0.49858356" weight="0.12734585" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Coverage" order="8" sideWeight="0.50141644" side_tool="true" weight="0.11997319" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49881798" visible="true" weight="0.27010724" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49881798" visible="true" weight="0.27345845" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" sideWeight="0.501182" side_tool="true" weight="0.2124665" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -563,9 +653,9 @@
       <window_info id="Capture Tool" order="7" />
       <window_info active="true" anchor="bottom" id="Find" order="0" sideWeight="0.49731904" visible="true" weight="0.1855524" />
       <window_info anchor="bottom" id="JRebel Executor" order="1" sideWeight="0.8914209" weight="0.43342775" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8491957" visible="true" weight="0.3696884" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.8491957" visible="true" weight="0.20963173" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932975" weight="0.5311615" />
-      <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.4966488" weight="0.31444758" />
+      <window_info anchor="bottom" id="Messages" order="4" sideWeight="0.4966488" weight="0.34419262" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -665,129 +755,6 @@
     </SUITE>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/jakarta/validation/jakarta.validation-api/2.0.1/jakarta.validation-api-2.0.1.jar!/javax/validation/constraints/NotNull.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmCartMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="63" column="37" lean-forward="true" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmCartService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="25" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="25" />
-          <folding>
-            <element signature="e#714#715#0" expanded="true" />
-            <element signature="e#769#770#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/global/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/cart/CartController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/interceptor/InterceptorsStack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/resolver/LoginUserHandlerMethodArgumentResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="27" column="68" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmFooprintMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="55" column="16" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmSpuMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmCollect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmCollectService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="43" column="22" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/sevice/footpring/FootprintBizService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/goods/SpuDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="74" column="20" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmCollectMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/conts/Const.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/componts/CacheComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="153" column="19" selection-start-line="153" selection-start-column="19" selection-end-line="153" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/appraise/AppraiseResponseDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/goods/GoodsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
@@ -843,20 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/interceptor/ApiLoginInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="58" column="83" selection-start-line="58" selection-start-column="83" selection-end-line="58" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/user/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6700">
-          <caret line="306" column="28" selection-start-line="306" selection-start-column="28" selection-end-line="306" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/Date.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2350">
@@ -878,24 +831,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="51" column="25" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmUserMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -925,27 +864,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmOrder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-825">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/order/OrderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="386" column="16" lean-forward="true" selection-start-line="386" selection-start-column="16" selection-end-line="386" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -977,13 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmOrderMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3575">
-          <caret line="143" column="82" selection-start-line="143" selection-start-column="82" selection-end-line="143" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/order/OrderDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2150">
@@ -1012,13 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmAddress.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/util/List.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1035,8 +943,187 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/address/AddressController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="89" column="35" selection-start-line="89" selection-start-column="22" selection-end-line="89" selection-end-column="35" />
+        <state relative-caret-position="-150">
+          <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/order/OrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="145" column="98" selection-start-line="145" selection-start-column="42" selection-end-line="145" selection-end-column="98" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmAddress.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="62" column="26" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-272">
+          <caret line="51" column="25" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmSku.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/common/validator/ValidatorUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/basecommon/util/BaiduMapUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="243" column="27" selection-start-line="243" selection-start-column="27" selection-end-line="243" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmSpuMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmSupplierMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1261" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmOrderMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="143" column="43" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmSpuAttributeMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-386" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/lm/LmDistributionPointMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="85" column="34" selection-start-line="85" selection-start-column="12" selection-end-line="85" selection-end-column="34" />
+          <folding>
+            <element signature="e#2835#2839#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dao/LmDistributionPointMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="19" selection-start-line="19" selection-end-line="19" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/basecommon/model/ApiResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1625">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/entity/LmDistributionPoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-825">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/dto/UserDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/config/interceptor/ApiLoginInterceptor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="43" column="62" lean-forward="true" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-redis/2.2.0.RELEASE/spring-data-redis-2.2.0.RELEASE.jar!/org/springframework/data/redis/core/ValueOperations.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/user/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="322" column="133" lean-forward="true" selection-start-line="322" selection-start-column="23" selection-end-line="322" selection-end-column="133" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/modules/lm/service/LmDistributionPointService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-750" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application-prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-825" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/icloud/api/web/geographic/LocationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="26" selection-start-line="26" selection-end-line="27" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/icloud/DistributionPointTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
         </state>
       </provider>
     </entry>

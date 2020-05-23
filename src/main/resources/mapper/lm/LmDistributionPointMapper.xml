@@ -80,4 +80,25 @@ select * from lm_distribution_point t
 </if>
 </where>
 </select>
+
+
+    <!--根据经纬度查询符合配送距离的配送点 最进配送点-->
+<select id="selectLatestDisbutPoit" resultType="com.icloud.modules.lm.entity.LmDistributionPoint">
+    SELECT
+    *,(
+    6371 * acos (
+    cos ( radians(#{lat}) )
+    * cos( radians( t.lat ) )
+    * cos( radians( t.lnt ) - radians(#{lnt}) )
+    + sin ( radians(#{lat}) )
+    * sin( radians( lat ) )
+    )
+    )*1000 AS distance
+    FROM lm_distribution_point t
+    HAVING distance &lt; t.distribution_scope
+    ORDER BY distance asc
+    LIMIT 0 , 1;
+
+</select>
+
 </mapper>

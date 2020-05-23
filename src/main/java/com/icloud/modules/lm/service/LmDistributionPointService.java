@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.icloud.basecommon.service.BaseServiceImpl;
 import com.icloud.modules.lm.dao.LmDistributionPointMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
+
 /**
  * 供货商配送点 
  * @author zdh
@@ -18,5 +21,9 @@ public class LmDistributionPointService extends BaseServiceImpl<LmDistributionPo
 
     @Autowired
     private LmDistributionPointMapper lmDistributionPointMapper;
+
+    public LmDistributionPoint selectLatestDisbutPoit(BigDecimal lnt, BigDecimal lat){
+        return lmDistributionPointMapper.selectLatestDisbutPoit(lnt,lat);
+    }
 }
 

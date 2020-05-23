@@ -1,23 +1,18 @@
 package com.icloud.basecommon.util;
 
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.icloud.common.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class BaiduMapUtil {
 
@@ -254,7 +249,8 @@ public class BaiduMapUtil {
             address = java.net.URLEncoder.encode(addr, "UTF-8");
 
             //System.out.println(address);
-            String addrconvertUrl = "http://api.map.baidu.com/geocoder/v2/?output=json&ak=A23543b3be51778406429cba6b7d74c4&address=" + address;
+//            String addrconvertUrl = "http://api.map.baidu.com/geocoder/v2/?output=json&ak=A23543b3be51778406429cba6b7d74c4&address=" + address;
+            String addrconvertUrl = "http://api.map.baidu.com/geocoding/v3/?address="+address+"&output=json&ak=7cFRhQCzRHxmbvt85XjFfIZipbh6cgM9";
             URL myURL = null;
 
             String jsonCoord = httpRequest(addrconvertUrl);
@@ -289,7 +285,7 @@ public class BaiduMapUtil {
     }
 
     public static void main(String[] args) {
-//        String[] o = getCoordinate("深圳市南山区");
+        String[] o = getCoordinate("深圳市南山区");
 //        System.out.println(o);
         String[] o1 = getAddr("114.35047403624727","22.71623346474869");
         System.out.println(o1[0]);

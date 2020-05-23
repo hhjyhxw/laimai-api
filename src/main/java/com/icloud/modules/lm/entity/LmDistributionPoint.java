@@ -70,5 +70,8 @@ public class LmDistributionPoint implements Serializable {
    	   	   /* 更新时间 */
        @TableField("updated_time")
        private Date updatedTime;
+
+       @TableField(exist = false)//用户地址与配送点 距离（单位m）
+       private int distance;
    	
 }

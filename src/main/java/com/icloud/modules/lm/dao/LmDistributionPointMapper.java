@@ -2,6 +2,8 @@ package com.icloud.modules.lm.dao;
 
 import com.icloud.modules.lm.entity.LmDistributionPoint;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -14,4 +16,6 @@ import java.util.Map;
 public interface LmDistributionPointMapper extends BaseMapper<LmDistributionPoint> {
 
 	List<LmDistributionPoint> queryMixList(Map<String, Object> map);
+
+    LmDistributionPoint selectLatestDisbutPoit(BigDecimal lnt,BigDecimal lat);
 }

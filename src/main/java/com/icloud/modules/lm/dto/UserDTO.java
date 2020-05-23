@@ -1,5 +1,6 @@
 package com.icloud.modules.lm.dto;
 
+import com.icloud.modules.lm.entity.LmDistributionPoint;
 import lombok.Data;
 
 import java.util.Date;
@@ -36,4 +37,7 @@ public class UserDTO extends SuperDTO {
      * 登录成功，包装此参数
      */
     private String accessToken;
+
+    //根据默认地址获取最近配送点 并设置用户登陆缓存
+    private LmDistributionPoint distrpoint;
 }

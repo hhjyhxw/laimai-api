@@ -85,6 +85,11 @@ select * from lm_spu t
 </where>
 </select>
 
+
+    <update id="incSales">
+        UPDATE lm_spu SET sales = sales + #{delta} WHERE id = #{spuId}
+    </update>
+
     <select id="getAllPage"  resultMap="BaseResultMap">
         select * from lm_spu t
         <where>

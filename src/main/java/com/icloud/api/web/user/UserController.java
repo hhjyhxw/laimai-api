@@ -9,7 +9,6 @@ import com.icloud.api.sevice.user.UserBizService;
 import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.basecommon.util.GeneratorUtil;
 import com.icloud.basecommon.util.SHAUtil;
-import com.icloud.basecommon.util.lang.StringUtils;
 import com.icloud.common.IpUtil;
 import com.icloud.config.global.MyPropertitys;
 import com.icloud.config.notify.SMSClient;
@@ -24,6 +23,7 @@ import com.icloud.modules.lm.service.LmUserService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.apache.commons.codec.digest.Md5Crypt;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -314,6 +314,7 @@ public class UserController {
                         newUserDO.setLastLoginTime(now);
                         newUserDO.setCreatedTime(now);
                         newUserDO.setUpdatedTime(now);
+                        newUserDO.setLevel("0");
                         lmUserService.save(newUserDO);
                         //这一步是为了封装上数据库上配置的默认值
                         LmUser userDO = (LmUser) lmUserService.getById(newUserDO.getId());
@@ -346,6 +347,7 @@ public class UserController {
                     newUserDO.setLastLoginTime(now);
                     newUserDO.setCreatedTime(now);
                     newUserDO.setUpdatedTime(now);
+                    newUserDO.setLevel("0");
                     lmUserService.save(newUserDO);
                     //这一步是为了封装上数据库上配置的默认值
                     userDO = (LmUser) lmUserService.getById(newUserDO.getId());
@@ -412,6 +414,7 @@ public class UserController {
                 newUserDO.setCreatedTime(now);
                 newUserDO.setUpdatedTime(now);
                 newUserDO.setStatus("1");
+                newUserDO.setLevel("0");
                 lmUserService.save(newUserDO);
                 //这一步是为了封装上数据库上配置的默认值
                 userDO = (LmUser) lmUserService.getById(newUserDO.getId());

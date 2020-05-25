@@ -18,6 +18,7 @@ import com.icloud.basecommon.model.ApiResponse;
 import com.icloud.basecommon.util.GeneratorUtil;
 import com.icloud.basecommon.util.lang.StringUtils;
 import com.icloud.basecommon.web.AppBaseController;
+import com.icloud.common.DateUtil;
 import com.icloud.common.IpUtil;
 import com.icloud.common.util.StringUtil;
 import com.icloud.config.global.MyPropertitys;
@@ -370,6 +371,7 @@ public class OrderController extends AppBaseController {
         //封装SKU
         orderDTOList.forEach(item -> {
             item.setSkuList(lmOrderSkuService.list(new QueryWrapper<LmOrderSku>().eq("order_id", item.getId())));
+            item.setCreatetimeStr(DateUtil.commonFormatDate(item.getCreatedTime(),"yyyy-MM-dd HH:mm:ss"));
         });
         Page<OrderDTO> page = new Page<>(orderDTOList, pageNo, pageSize, count);
         return new ApiResponse().ok(page);

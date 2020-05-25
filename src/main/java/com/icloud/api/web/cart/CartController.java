@@ -48,7 +48,7 @@ public class CartController {
             //若非空
             cartDO.setId(cartDOS.get(0).getId());
             cartDO.setNum(cartDOS.get(0).getNum() + num);
-            cartDO.setCreatedTime(now);
+            cartDO.setUpdatedTime(now);
             return new ApiResponse().okOrError(lmCartService.updateById(cartDO));
         } else {
             //不存在，则添加购物车
@@ -57,7 +57,7 @@ public class CartController {
             cartDO.setUserId(user.getId());
             cartDO.setAddressId(defautAddress.getId());
             cartDO.setCreatedTime(now);
-            cartDO.setCreatedTime(now);
+            cartDO.setUpdatedTime(now);
             return new ApiResponse().okOrError(lmCartService.save(cartDO));
         }
     }
@@ -128,6 +128,7 @@ public class CartController {
     public ApiResponse updateCartItemNum(Long cartId, Integer num, @LoginUser UserDTO user) throws ServiceException {
         LmCart cartDO = new LmCart();
         cartDO.setNum(num);
+        cartDO.setUpdatedTime(new Date());
         Boolean result = lmCartService.update(cartDO,new UpdateWrapper<LmCart>()
                 .eq("id", cartId)
                 .eq("user_id", user.getId()));

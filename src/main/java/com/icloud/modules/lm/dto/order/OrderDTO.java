@@ -94,4 +94,6 @@ public class OrderDTO extends SuperDTO {
 
     private ShipTraceDTO shipTraceDTO;
 
+    private String createtimeStr;
+
 }

@@ -9,7 +9,9 @@ import com.icloud.exceptions.ApiException;
 import com.icloud.exceptions.ServiceException;
 import com.icloud.modules.lm.dto.CartDTO;
 import com.icloud.modules.lm.dto.UserDTO;
+import com.icloud.modules.lm.entity.LmAddress;
 import com.icloud.modules.lm.entity.LmCart;
+import com.icloud.modules.lm.service.LmAddressService;
 import com.icloud.modules.lm.service.LmCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ import java.util.List;
 public class CartController {
     @Autowired
     private LmCartService lmCartService;
+    @Autowired
+    private LmAddressService lmAddressService;
 
     @Autowired
     private CategoryBizService categoryBizService;
@@ -34,8 +38,10 @@ public class CartController {
     @RequestMapping("/addCartItem")
     @ResponseBody
     public ApiResponse addCartItem(Long skuId, Integer num, @LoginUser UserDTO user) throws ApiException {
+        LmAddress defautAddress = getDefaultAddress(user);
         List<LmCart> cartDOS = lmCartService.list(
-                new QueryWrapper<LmCart>().eq("sku_id", skuId).eq("user_id", user.getId()));
+                new QueryWrapper<LmCart>().eq("sku_id", skuId).eq("user_id", user.getId())
+                        .eq("address_id", defautAddress.getId()));
         LmCart cartDO = new LmCart();
         Date now = new Date();
         if (!CollectionUtils.isEmpty(cartDOS)) {
@@ -49,6 +55,7 @@ public class CartController {
             cartDO.setSkuId(skuId);
             cartDO.setNum(num);
             cartDO.setUserId(user.getId());
+            cartDO.setAddressId(defautAddress.getId());
             cartDO.setCreatedTime(now);
             cartDO.setCreatedTime(now);
             return new ApiResponse().okOrError(lmCartService.save(cartDO));
@@ -59,7 +66,8 @@ public class CartController {
     @ResponseBody
     public ApiResponse subCartItem(Long skuId, Integer num, @LoginUser UserDTO user) throws ApiException {
         List<LmCart> cartDOS = lmCartService.list(
-                new QueryWrapper<LmCart>().eq("sku_id", skuId).eq("user_id", user.getId()));
+                new QueryWrapper<LmCart>().eq("sku_id", skuId).eq("user_id", user.getId())
+                        .eq("address_id", getDefaultAddress(user).getId()));
 
         LmCart cartDO = new LmCart();
         if (!CollectionUtils.isEmpty(cartDOS)) {
@@ -80,7 +88,8 @@ public class CartController {
     @ResponseBody
     public ApiResponse removeCartItem(Long cartId, @LoginUser UserDTO user) throws ApiException {
         boolean result = lmCartService.remove(
-                new QueryWrapper<LmCart>() .eq("id", cartId).eq("user_id", user.getId()));
+                new QueryWrapper<LmCart>() .eq("id", cartId).eq("user_id", user.getId())
+                        .eq("address_id", getDefaultAddress(user).getId()));
         return new ApiResponse().okOrError(result);
 
     }
@@ -109,7 +118,8 @@ public class CartController {
     @ResponseBody
     public ApiResponse removeCartAll(@LoginUser UserDTO user) throws ServiceException {
         Boolean result = lmCartService.remove(
-                new QueryWrapper<LmCart>().eq("user_id", user.getId()));
+                new QueryWrapper<LmCart>().eq("user_id", user.getId())
+                        .eq("address_id", getDefaultAddress(user).getId()));
         return new ApiResponse().okOrError(result);
     }
 
@@ -131,18 +141,29 @@ public class CartController {
     @RequestMapping("/countCart")
     @ResponseBody
     public ApiResponse countCart(@LoginUser UserDTO user) throws ServiceException {
-        Integer num = lmCartService.count(new QueryWrapper<LmCart>().eq("user_id", user.getId()));
+        Integer num = lmCartService.count(new QueryWrapper<LmCart>().eq("user_id", user.getId())
+                .eq("address_id", getDefaultAddress(user).getId()));
         return new ApiResponse().ok(num);
     }
 
     @RequestMapping("/getCartList")
     @ResponseBody
     public ApiResponse getCartList(@LoginUser UserDTO user) throws ServiceException {
-        List<CartDTO> cartList = lmCartService.getCartList(user.getId());
+        List<CartDTO> cartList = lmCartService.getCartList(user.getId(),getDefaultAddress(user).getId() );
         for (CartDTO cartDTO : cartList) {
             List<Long> categoryFamily = categoryBizService.getCategoryFamily(cartDTO.getCategoryId());
             cartDTO.setCategoryIdList(categoryFamily);
         }
         return new ApiResponse().ok(cartList);
+    }
+
+    private LmAddress getDefaultAddress(UserDTO user){
+        List<LmAddress> defautAdress = lmAddressService.list(
+                new QueryWrapper<LmAddress>().eq("user_id", user.getId())
+                        .eq("is_default", "1"));
+        if(defautAdress==null || defautAdress.size()==0){
+            throw new ApiException("没有默认地址");
+        }
+        return defautAdress.get(0);
     }
 }

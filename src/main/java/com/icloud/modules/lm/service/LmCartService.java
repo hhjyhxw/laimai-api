@@ -23,8 +23,8 @@ public class LmCartService extends BaseServiceImpl<LmCartMapper,LmCart> {
     @Autowired
     private LmCartMapper lmCartMapper;
 
-    public List<CartDTO> getCartList(Long userId){
-        return lmCartMapper.getCartList(userId);
+    public List<CartDTO> getCartList(Long userId,Long addressId){
+        return lmCartMapper.getCartList(userId,addressId);
     }
 }
 

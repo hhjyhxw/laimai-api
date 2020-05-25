@@ -67,7 +67,7 @@ public class IntegralController extends AppBaseController {
         Long supplierId = SessionUtils.getSupplierId(request);
         if (!CollectionUtils.isEmpty(categoryPickAd)) {
             for (AdvertisementDTO item : categoryPickAd) {
-                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 10, new Long(item.getPageUrl().substring(item.getPageUrl().lastIndexOf("=") + 1)), "sales", false,null,supplierId);
+                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 15, new Long(item.getPageUrl().substring(item.getPageUrl().lastIndexOf("=") + 1)), "sales", false,null,supplierId);
                 item.setData(pickPage.getItems());
             }
         }

@@ -139,7 +139,7 @@ select * from lm_spu t
         limit #{offset},#{pageSize}
     </select>
 
-    <select id="counts"  resultMap="BaseResultMap">
+    <select id="counts"  resultType="java.lang.Integer">
         select count(*) from lm_spu t,lm_spu_supplier s
         <where>
             t.id = s.spu_id and s.supplier_id = #{supplierId}

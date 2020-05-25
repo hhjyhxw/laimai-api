@@ -40,4 +40,6 @@ public class UserDTO extends SuperDTO {
 
     //根据默认地址获取最近配送点 并设置用户登陆缓存
     private LmDistributionPoint distrpoint;
+
+
 }

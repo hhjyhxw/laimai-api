@@ -24,7 +24,8 @@ public class SessionUtils {
             if(!StringUtil.checkStr(accessToken)){
                 return null;
             }
-            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            //            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean("stringRedisTemplate");
             Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
             if(!StringUtil.checkStr(accessToken)){
                 return null;
@@ -47,7 +48,8 @@ public class SessionUtils {
             if(!StringUtil.checkStr(accessToken)){
                 return null;
             }
-            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            //            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean("stringRedisTemplate");
             Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
             if(!StringUtil.checkStr(accessToken)){
                 return null;
@@ -72,7 +74,9 @@ public class SessionUtils {
             if(!StringUtil.checkStr(accessToken)){
                 return null;
             }
-            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+//            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean("stringRedisTemplate");
+
             Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
             if(!StringUtil.checkStr(accessToken)){
                 return null;
@@ -100,7 +104,8 @@ public class SessionUtils {
             if(!StringUtil.checkStr(accessToken)){
                 return 1L;
             }
-            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            //            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean(StringRedisTemplate.class);
+            StringRedisTemplate userRedisTemplate = SpringContextHolder.getBean("stringRedisTemplate");
             Object sessuser = userRedisTemplate.opsForValue().get(Const.USER_REDIS_PREFIX + accessToken);
             if(!StringUtil.checkStr(accessToken)){
                 return 1L;

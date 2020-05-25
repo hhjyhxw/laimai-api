@@ -165,7 +165,10 @@ public class GoodsBizService {
         params.put("pageSize",pageSize);
 
         Integer count = lmSpuMapper.counts(params);
-        List<LmSpu> spuDOS = lmSpuMapper.getAllPageByMap(params);
+        List<LmSpu> spuDOS = new ArrayList<LmSpu>();
+        if(count!=null && count>0){
+            spuDOS = lmSpuMapper.getAllPageByMap(params);
+        }
 //        List<LmSpu> spuDOS = lmSpuMapper.getAllPage(params,pageSize * (pageNo - 1),pageSize);
 //        List<LmSpu> spuDOS = pages.getRecords();
         //组装SPU

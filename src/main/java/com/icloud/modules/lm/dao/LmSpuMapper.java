@@ -21,5 +21,5 @@ public interface LmSpuMapper extends BaseMapper<LmSpu> {
 
     List<LmSpu> getAllPageByMap(Map<String, Object> params);
 
-    int counts(Map<String, Object> params);
+    Integer counts(Map<String, Object> params);
 }

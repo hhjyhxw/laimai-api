@@ -68,6 +68,7 @@ select * from lm_cart t
         lm_spu AS p
         WHERE
         c.user_id = #{userId}
+        and c.address_id = #{addressId}
         AND c.sku_id = k.id
         AND k.spu_id = p.id
     </select>

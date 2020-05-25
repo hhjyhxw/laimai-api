@@ -108,9 +108,11 @@ select * from lm_spu t
         limit #{offset},#{pageSize}
     </select>
 
+
     <select id="getAllPageByMap"  resultMap="BaseResultMap">
-        select * from lm_spu t
+        select * from lm_spu t,lm_spu_supplier s
         <where>
+            t.id = s.spu_id and s.supplier_id = #{supplierId}
             <if test="title != null">
                 and t.title like concat(concat('%',#{title}),'%')
             </if>
@@ -137,4 +139,26 @@ select * from lm_spu t
         limit #{offset},#{pageSize}
     </select>
 
+    <select id="counts"  resultMap="BaseResultMap">
+        select count(*) from lm_spu t,lm_spu_supplier s
+        <where>
+            t.id = s.spu_id and s.supplier_id = #{supplierId}
+            <if test="title != null">
+                and t.title like concat(concat('%',#{title}),'%')
+            </if>
+            <if test="freight_template_id != null">
+                and t.freight_template_id = #{freight_template_id}
+            </if>
+            <if test="status != null and status!='' ">
+                and t.status = #{status}
+            </if>
+            <if test="categoryIds != null" >
+                and t.category_id in
+                <foreach item="item" index="index" collection="categoryIds" open="("
+                         separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

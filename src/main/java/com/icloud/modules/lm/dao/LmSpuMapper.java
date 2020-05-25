@@ -20,4 +20,6 @@ public interface LmSpuMapper extends BaseMapper<LmSpu> {
     public List<LmSpu> getAllPage(Map<String, Object> map,@Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
 
     List<LmSpu> getAllPageByMap(Map<String, Object> params);
+
+    int counts(Map<String, Object> params);
 }

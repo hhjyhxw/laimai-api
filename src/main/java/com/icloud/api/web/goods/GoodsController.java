@@ -5,6 +5,7 @@ import com.icloud.annotation.LoginUser;
 import com.icloud.api.sevice.goods.GoodsBizService;
 import com.icloud.api.sevice.groupshop.GroupShopBizService;
 import com.icloud.basecommon.model.ApiResponse;
+import com.icloud.basecommon.util.SessionUtils;
 import com.icloud.basecommon.web.AppBaseController;
 import com.icloud.exceptions.ApiException;
 import com.icloud.modules.lm.dto.UserDTO;
@@ -31,6 +32,8 @@ public class GoodsController extends AppBaseController {
     @ResponseBody
     @AuthIgnore
     public ApiResponse getGoodsPage(Integer pageNo, Integer pageSize, Long categoryId, String orderBy, Boolean isAsc, String title) throws ApiException {
+        //获取商户id
+        Long supplierId = SessionUtils.getSupplierId(request);
         pageNo = pageNo==null?1:pageNo;
         pageSize = pageSize==null?15:pageSize;
         Map map = getMap("pageNo", pageNo,null);
@@ -39,8 +42,10 @@ public class GoodsController extends AppBaseController {
         getMap("orderBy", orderBy,map);
         getMap("isAsc", isAsc,map);
         getMap("title", title,map);
+        getMap("supplierId", supplierId,map);
         println(map,"getGoodsPage");
-        Page<SpuDTO> page = goodsBizService.getGoodsPage(pageNo, pageSize, categoryId, orderBy, isAsc, title);
+
+        Page<SpuDTO> page = goodsBizService.getGoodsPage(pageNo, pageSize, categoryId, orderBy, isAsc, title,supplierId);
         return new ApiResponse().ok(page);
     }
 

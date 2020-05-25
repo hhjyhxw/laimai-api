@@ -52,7 +52,7 @@ public class LocationController extends AppBaseController {
         //根据经纬度检查是否存在配送点
         LmDistributionPoint point = lmDistributionPointService.selectLatestDisbutPoit(address.getLnt(),address.getLat());
         if(point==null){
-            ApiResponse r = new ApiResponse().error("没用符合的配送点",false);
+            ApiResponse r = new ApiResponse().error("没用符合的配送点,请更换地址再试",false);
             r.setCode(3000);
             return r;
         }

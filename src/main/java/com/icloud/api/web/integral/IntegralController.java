@@ -5,6 +5,8 @@ import com.icloud.annotation.AuthIgnore;
 import com.icloud.api.sevice.goods.GoodsBizService;
 import com.icloud.api.sevice.recommend.RecommendBizService;
 import com.icloud.basecommon.model.ApiResponse;
+import com.icloud.basecommon.util.SessionUtils;
+import com.icloud.basecommon.web.AppBaseController;
 import com.icloud.exceptions.ApiException;
 import com.icloud.modules.lm.dto.AdvertisementDTO;
 import com.icloud.modules.lm.dto.IntegralIndexDataDTO;
@@ -28,7 +30,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api/integral")
-public class IntegralController {
+public class IntegralController extends AppBaseController {
 
 
     @Autowired
@@ -62,9 +64,10 @@ public class IntegralController {
         //分类code 4  AdType
         List<AdvertisementDTO> categoryPickAd = adDTOMap.get("t" + AdvertisementType.CATEGORY_PICK.getCode());
         //封装 分类精选 商品
+        Long supplierId = SessionUtils.getSupplierId(request);
         if (!CollectionUtils.isEmpty(categoryPickAd)) {
             for (AdvertisementDTO item : categoryPickAd) {
-                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 10, new Long(item.getPageUrl().substring(item.getPageUrl().lastIndexOf("=") + 1)), "sales", false,null);
+                Page<SpuDTO> pickPage = goodsBizService.getGoodsPage(1, 10, new Long(item.getPageUrl().substring(item.getPageUrl().lastIndexOf("=") + 1)), "sales", false,null,supplierId);
                 item.setData(pickPage.getItems());
             }
         }
@@ -80,13 +83,13 @@ public class IntegralController {
         /**
          * 销量冠军
          */
-        List<SpuDTO> salesTop = goodsBizService.getGoodsPage(1, 8, null, "sales", false, null).getItems();
+        List<SpuDTO> salesTop = goodsBizService.getGoodsPage(1, 8, null, "sales", false, null,supplierId).getItems();
         integralIndexDataDTO.setSalesTop(salesTop);
 
         /**
          * 最近上新
          */
-        List<SpuDTO> newTop = goodsBizService.getGoodsPage(1, 8, null, "id", false, null).getItems();
+        List<SpuDTO> newTop = goodsBizService.getGoodsPage(1, 8, null, "id", false, null,supplierId).getItems();
         integralIndexDataDTO.setNewTop(newTop);
         return new ApiResponse().ok(integralIndexDataDTO);
     }

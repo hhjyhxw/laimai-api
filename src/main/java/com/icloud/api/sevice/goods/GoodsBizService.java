@@ -93,7 +93,7 @@ public class GoodsBizService {
 //    private GroupShopSkuMapper groupShopSkuMapper;
 
 
-    public Page<SpuDTO> getGoodsPage(Integer pageNo, Integer pageSize, Long categoryId, String orderBy, Boolean isAsc, String title) throws ApiException {
+    public Page<SpuDTO> getGoodsPage(Integer pageNo, Integer pageSize, Long categoryId, String orderBy, Boolean isAsc, String title,Long supplierId) throws ApiException {
         QueryWrapper<LmSpu> wrapper = new QueryWrapper<LmSpu>();
         Map<String,Object> params = new HashMap<String,Object>();
 
@@ -102,7 +102,7 @@ public class GoodsBizService {
             params.put("title",title);
         } else {
             //若关键字为空，尝试从缓存取列表
-            Page objFromCache = cacheComponent.getObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc, Page.class);
+            Page objFromCache = cacheComponent.getObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc + '_'+supplierId, Page.class);
             if (objFromCache != null) {
                 return objFromCache;
             }
@@ -152,13 +152,19 @@ public class GoodsBizService {
                 params.put("categoryIds",childrenIds);
             }
         }
-
+        //售卖中商品
         wrapper.eq("status", String.valueOf(SpuStatusType.SELLING.getCode()));
         params.put("status",String.valueOf(SpuStatusType.SELLING.getCode()));
 
-        Integer count = lmSpuMapper.selectCount(wrapper);
+        //商户id
+        wrapper.eq("supplierId", supplierId);
+        params.put("supplierId",supplierId);
+
+//        Integer count = lmSpuMapper.selectCount(wrapper);
         params.put("offset",pageSize * (pageNo - 1));
         params.put("pageSize",pageSize);
+
+        Integer count = lmSpuMapper.counts(params);
         List<LmSpu> spuDOS = lmSpuMapper.getAllPageByMap(params);
 //        List<LmSpu> spuDOS = lmSpuMapper.getAllPage(params,pageSize * (pageNo - 1),pageSize);
 //        List<LmSpu> spuDOS = pages.getRecords();
@@ -179,7 +185,7 @@ public class GoodsBizService {
         Page<SpuDTO> page = new Page<SpuDTO>(spuDTOList,pageNo,pageSize,count);
         if (StringUtils.isEmpty(title)) {
             //若关键字为空，制作缓存
-            cacheComponent.putObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc, page, Const.CACHE_ONE_DAY);
+            cacheComponent.putObj(CA_SPU_PAGE_PREFIX + categoryId + "_" + pageNo + "_" + pageSize + "_" + orderBy + "_" + isAsc+ '_'+supplierId, page, Const.CACHE_ONE_DAY);
         }
         return page;
     }

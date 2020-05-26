@@ -24,7 +24,7 @@ public class CouponAdminDTO extends SuperDTO {
 
     private Integer surplus;
 
-    private Integer limit;
+    private Integer limits;
 
     private Integer discount;
 

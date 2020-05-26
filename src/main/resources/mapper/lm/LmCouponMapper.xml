@@ -98,7 +98,7 @@ select * from lm_coupon t
         coupon_id AS `key`,
         count( coupon_id ) AS `value`
         FROM
-        unimall_user_coupon
+        lm_user_coupon
         WHERE
         coupon_id IN
         <foreach open="(" close=")" collection="couponIds" separator="," item="cid">
@@ -118,7 +118,7 @@ select * from lm_coupon t
         c.description AS description,
         c.total AS total,
         c.surplus AS surplus,
-        c.`limit` AS `limit`,
+        c.`limits` AS `limits`,
         c.discount AS discount,
         c.min AS min,
         c.status AS status,
@@ -140,10 +140,10 @@ select * from lm_coupon t
         </if>
         <if test="status != null">
             <if test="status >= 0">
-                AND c.status = #{status} AND (unix_timestamp(c.gmt_end) &gt; unix_timestamp(#{now}) or c.days is not null)
+                AND c.status = #{status} AND (unix_timestamp(c.end) &gt; unix_timestamp(#{now}) or c.days is not null)
             </if>
             <if test="status &lt; 0">
-                AND unix_timestamp(c.gmt_end) &lt; unix_timestamp(#{now})
+                AND unix_timestamp(c.end) &lt; unix_timestamp(#{now})
             </if>
         </if>
         order BY c.id DESC
@@ -158,23 +158,23 @@ select * from lm_coupon t
         c.description,
         c.total,
         c.surplus,
-        c.`limit`,
+        c.`limits`,
         c.discount,
         c.`min`,
         c.`status`,
         c.category_id AS categoryId,
         c.days,
-        c.gmt_start AS gmtStart,
-        c.gmt_end AS gmtEnd,
-        c.gmt_update AS gmtUpdate,
-        c.gmt_create AS gmtCreate,
+        c.start AS start,
+        c.end AS end,
+        c.updated_time AS updatedTime,
+        c.created_time AS createdTime,
         y.title AS categoryTitle
         FROM
-        unimall_coupon AS c
-        LEFT JOIN unimall_category AS y ON y.id = c.category_id
+        lm_coupon AS c
+        LEFT JOIN lm_category AS y ON y.id = c.category_id
         WHERE
         c.`status` = 1
-        AND (c.gmt_end IS NULL OR ( unix_timestamp(c.gmt_start) &lt; unix_timestamp(now( )) AND unix_timestamp(c.gmt_end) &gt; unix_timestamp(now( )) ))
+        AND (c.end IS NULL OR ( unix_timestamp(c.start) &lt; unix_timestamp(now( )) AND unix_timestamp(c.end) &gt; unix_timestamp(now( )) ))
     </select>
 
 </mapper>

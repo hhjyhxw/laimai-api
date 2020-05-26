@@ -33,13 +33,13 @@ public class LmCoupon implements Serializable {
    	   	   /* 描述 */
        @TableField("description")
        private String description;
-   	   	   /* 商品总额 */
+   	   	   /* 代金券总量*/
        @TableField("total")
        private Integer total;
-   	   	   /* 会员类型0:非会员1:会员2:全部 */
+   	   	   /* 代金券剩余量 */
        @TableField("surplus")
        private String surplus;
-   	   	   /*  */
+   	   	   /* 每人限领次数 ；-1不限制 */
        @TableField("limits")
        private Integer limits;
    	   	   /* 扣减金额 */

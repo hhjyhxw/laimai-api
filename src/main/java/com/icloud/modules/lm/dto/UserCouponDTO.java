@@ -16,7 +16,7 @@ public class UserCouponDTO extends SuperDTO {
 
     private Long categoryId;
 
-    private Integer min;
+    private Integer min;//使用优惠券最顶订单金额
 
     /**
      * 优惠券价格
@@ -31,8 +31,8 @@ public class UserCouponDTO extends SuperDTO {
 
     private Date gmtUsed;
 
-    private Date gmtStart;
+    private Date start;
 
-    private Date gmtEnd;
+    private Date end;
 
 }

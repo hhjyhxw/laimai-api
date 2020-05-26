@@ -18,5 +18,9 @@ public class LmCouponService extends BaseServiceImpl<LmCouponMapper,LmCoupon> {
 
     @Autowired
     private LmCouponMapper lmCouponMapper;
+
+    public void decCoupon(Long couponId) {
+        lmCouponMapper.decCoupon(couponId);
+    }
 }
 

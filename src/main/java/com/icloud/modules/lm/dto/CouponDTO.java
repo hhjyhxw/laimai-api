@@ -20,7 +20,7 @@ public class CouponDTO extends SuperDTO {
 
     private Integer surplus;
 
-    private Integer limit;
+    private Integer limits;
 
     private Integer discount;
 
@@ -39,8 +39,8 @@ public class CouponDTO extends SuperDTO {
      */
     private Integer nowCount;
 
-    private Date gmtStart;
+    private Date start;
 
-    private Date gmtEnd;
+    private Date end;
 
 }
